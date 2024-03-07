@@ -12,7 +12,7 @@ function LoginPage(props) {
 
     const navigate = useNavigate();
 
-    const { storeToken, authenticateUser } = useContext(AuthContext);
+    const { storeToken, authenticateUser ,storeUser } = useContext(AuthContext);
 
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
@@ -25,7 +25,9 @@ function LoginPage(props) {
             .post(`${API_URL}/auth/login`, requestBody)
             .then((response) => {
                 console.log("JWT token", response.data.authToken);
+                console.log("Response", response.data.payload);
 
+                storeUser(response.data.payload._id);
                 storeToken(response.data.authToken);
                 authenticateUser();
                 navigate("/");

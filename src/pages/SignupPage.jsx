@@ -19,14 +19,14 @@ function SignupPage(props) {
     const handlePassword = (e) => setPassword(e.target.value);
     const handleName = (e) => setName(e.target.value);
     const handleAgentCheckbox = (e) => { // TODO checkbox fix
-        setIsAgent(e.target.checked)
+        setIsAgent(!isAgent)
         console.log(isAgent)
     }
 
 
     const handleSignupSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { email, password, name, isAgent: isAgent };
+        const requestBody = { email, password, name, isAgent };
 
         axios.post(`${API_URL}/auth/signup`, requestBody)
             .then((response) => {

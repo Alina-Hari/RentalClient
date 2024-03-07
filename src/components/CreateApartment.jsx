@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 const apartmentTypes = ["Studio", "Loft", "Duplex", "Apartment", "House"];
 import { useState } from "react";
+import DTPicker from "./DTPicker";
 
 //const [images, setImages] = useState(""); // TODO add cloudynary
 //const [availableDates, setAvailableDates] = useState([]); // TODO calendar
 
-function Popup(props) {
+function CreateApartment(props) {
   const [apartmentType, setApartmentType] = useState("");
   const [floor, setFloor] = useState("");
   const [price, setPrice] = useState(0);
@@ -54,8 +55,6 @@ function Popup(props) {
       .catch((e) => {
         console.log("Error, ", e);
       });
-
-    navigate("/apartments");
     props.closePopUp();
   };
 
@@ -63,7 +62,7 @@ function Popup(props) {
   //     <div className="smmax:w-[100vw] smmax:h-[100vh]  smmax:top-0 smmax:bottom-0 smmax:right-0 smmax:left-0 w-[30vw] h-[50vh] absolute border border-black text-black left-1/3 right-1/3 bottom-1/3 top-1/3 p-5 text-center m-auto rounded-lg bg-white">
 
   return (
-    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
+    <div className=" top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
       <div className="bg-white rounded-lg shadow-lg p-6">
         <div className="card-actions justify-end">
           <button onClick={props.closePopUp} type="button" className="btn btn-sm btn-circle btn-outline">
@@ -132,6 +131,9 @@ function Popup(props) {
             Is it pet friendly?
             <input type="checkbox" className="checkbox checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} required onChange={handleisPetFriendly} />
           </label>
+          <label>
+          <DTPicker />
+          </label>
           <button type="submit" className="btn btn-outline btn-accent rounded-md"> Create </button>
         </form>
       </div >
@@ -139,4 +141,4 @@ function Popup(props) {
   );
 }
 
-export default Popup;
+export default CreateApartment;

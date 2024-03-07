@@ -7,6 +7,8 @@ import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import ApartmentListPage from './pages/ApartmentListPage'
 import ApartmentDetailsPage from './pages/ApartmentDetailsPage'
+import TestPage from './pages/TestPage'
+import AppoinmentListPage from './pages/AppoinmentListPage'
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/apartments" element={<ApartmentListPage />} />
         <Route path="/apartments/:apartmentId" element={<ApartmentDetailsPage />} />
+        <Route path="/appoinments/" element={<AppoinmentListPage />} />
+        <Route path="/test" element={<TestPage />} />
 
       </Routes>
     </>
