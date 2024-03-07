@@ -59,67 +59,83 @@ function Popup(props) {
     props.closePopUp();
   };
 
+
+  //     <div className="smmax:w-[100vw] smmax:h-[100vh]  smmax:top-0 smmax:bottom-0 smmax:right-0 smmax:left-0 w-[30vw] h-[50vh] absolute border border-black text-black left-1/3 right-1/3 bottom-1/3 top-1/3 p-5 text-center m-auto rounded-lg bg-white">
+
   return (
-    <div className="smmax:w-[100vw] smmax:h-[100vh]  smmax:top-0 smmax:bottom-0 smmax:right-0 smmax:left-0 w-[30vw] h-[50vh] absolute border border-black text-black left-1/3 right-1/3 bottom-1/3 top-1/3 p-5 text-center m-auto rounded-lg bg-white">
-      <div className="flex flex-col text-purple-700 text-xl">
+    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="card-actions justify-end">
+          <button onClick={props.closePopUp} type="button" className="btn btn-sm btn-circle btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
-          <label>Apartment Type</label>
-          <select
-            name="apartmentType"
-            id="apartmentType"
-            value={apartmentType}
-            required
-            onChange={(e) => {
-              setApartmentType(e.target.value);
-            }}
-            className="border rounded p-2 w-full mb-6 bg-gray-50"
-          >
-            <option value="">-- Select Type --</option>
-            {apartmentTypes.map((apartmentType, index) => {
-              return (
-                <option key={index} value={apartmentType}>
-                  {apartmentType}
-                </option>
-              );
-            })}
-          </select>
 
-          <label>Floor</label>
-          <input type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Apartment Type</span>
+            </div>
+            <select className="select select-bordered"
+              name="apartmentType"
+              id="apartmentType"
+              value={apartmentType}
+              required
+              onChange={(e) => {
+                setApartmentType(e.target.value);
+              }}
+            >
+              <option value="">-- Select Type --</option>
+              {apartmentTypes.map((apartmentType, index) => {
+                return (
+                  <option key={index} value={apartmentType}>
+                    {apartmentType}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
 
-          <label>Area</label>
-          <textarea type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Floor</span>
+            </div>
+            <input className="input input-bordered w-full max-w-xs" type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} /></label>
 
-          <label>Price</label>
-          <textarea type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Area</span>
+            </div>
+            <input className="input input-bordered w-full max-w-xs" type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} /></label>
 
-          <label>Country</label>
-          <textarea type="text" name="country" value={country} required onChange={(e) => setCountry(e.target.value)} />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Price</span></div>
+            <input className="input input-bordered w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
 
-          <label>City</label>
-          <textarea type="text" name="city" value={city} required onChange={(e) => setCity(e.target.value)} />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Country</span></div>
+            <input className="input input-bordered w-full max-w-xs" type="text" name="country" value={country} required onChange={(e) => setCountry(e.target.value)} /></label>
 
-          <label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">City</span></div>
+            <input className="input input-bordered w-full max-w-xs" type="text" name="city" value={city} required onChange={(e) => setCity(e.target.value)} /></label>
+
+          <label className="input flex items-center gap-2">
             Is it furnished?
-            <input type="checkbox" id="isFurnished" name="isFurnished" required checked={isFurnished} onChange={handleisFurnished} />
+            <input type="checkbox" className="checkbox checkbox-accent" id="isFurnished" name="isFurnished" required checked={isFurnished} onChange={handleisFurnished} />
           </label>
 
-          <label>
+          <label className="input flex items-center gap-2">
             Is it pet friendly?
-            <input type="checkbox" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} required onChange={handleisPetFriendly} />
+            <input type="checkbox" className="checkbox checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} required onChange={handleisPetFriendly} />
           </label>
-          <button type="submit"> Create </button>
+          <button type="submit" className="btn btn-outline btn-accent rounded-md"> Create </button>
         </form>
-      </div>
-
-      <button
-        type="button"
-        className="bg-gray-300 hover:bg-gray-400 mt-4 text-gray-800 font-bold py-2 px-4 rounded-l w-24"
-        onClick={props.closePopUp}
-      >
-        Close
-      </button>
-    </div>
+      </div >
+    </div >
   );
 }
 
