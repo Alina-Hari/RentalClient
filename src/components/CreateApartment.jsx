@@ -106,15 +106,17 @@ function CreateApartment(props) {
 
 
   const handleCountry = (e) => {
-
     let tempArray = locationData.filter((location) => {
       return location.country === e.target.value;
-    })
+    });
 
-    setFilteredCountry(tempArray.cities)
-    setCountry(e.target.value)
-    console.log(tempArray);
-  }
+    console.log('Filtered Country:', tempArray);
+
+    setFilteredCountry(tempArray.length > 0 ? tempArray[0].cities : null);
+    console.log('Filtered Cities:', filteredCountry);
+    setCountry(e.target.value);
+  };
+
 
   return (
     <div className=" top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
