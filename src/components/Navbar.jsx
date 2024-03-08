@@ -18,14 +18,12 @@ function Navbar() {
                 </>
             )}
 
+            <Link to="/apartments">
+                <button>Apartments</button>
+            </Link>
+
             {!isLoggedIn && (
                 <>
-
-                    <Link to="/apartments">
-                        <button>Apartments</button>
-                    </Link>
-
-
                     <Link to="/login">
                         <button>Login</button>
                     </Link>

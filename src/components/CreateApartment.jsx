@@ -2,10 +2,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 const apartmentTypes = ["Studio", "Loft", "Duplex", "Apartment", "House"];
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DTPicker from "./DTPicker";
+import service from "../services/file-upload.service";
 
-//const [images, setImages] = useState(""); // TODO add cloudynary
+const COUTRIES_AND_CITIES_API = "https://countriesnow.space/api/v0.1/countries"
+
 //const [availableDates, setAvailableDates] = useState([]); // TODO calendar
 
 function CreateApartment(props) {
@@ -14,21 +16,62 @@ function CreateApartment(props) {
   const [price, setPrice] = useState(0);
   const [area, setArea] = useState(0);
   const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [cities, setCities] = useState("");
   const [isFurnished, setIsFurnished] = useState(false);
   const [isPetFriendly, setIsPetFriendly] = useState(false);
+  const [images, setImages] = useState([]);
+  const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
+  const [locationData, setLocationData] = useState([])
+
+
+  useEffect(() => {
+    axios.get(COUTRIES_AND_CITIES_API)
+      .then(response => {
+        const tempArray = response.data.data.map((obj) => {
+          let country = obj.country;
+          let cities = obj.cities;
+
+          return { country, cities };
+
+        })
+        setLocationData(tempArray)
+        console.log(tempArray);
+      })
+
+  }, [])
+
 
   const navigate = useNavigate();
 
   const handleisFurnished = (e) => {
-    // TODO checkbox fix
     setIsFurnished(e.target.checked);
     console.log(setIsFurnished);
   };
 
   const handleisPetFriendly = (e) => {
-    // TODO checkbox fix
     setIsPetFriendly(e.target.checked);
+  };
+
+  const handleFileUpload = (e) => {
+
+    setWaitingForImageUrl(true);
+
+    const dataToUpload = new FormData();
+
+    const files = Array.from(e.target.files);
+
+    files.forEach((file) => {
+      dataToUpload.append(`images`, file);
+    });
+
+
+    service
+      .uploadImage(dataToUpload)
+      .then(response => {
+        setImages(response.fileUrls);
+        setWaitingForImageUrl(false);
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
   };
 
   const storedToken = localStorage.getItem("authToken");
@@ -42,13 +85,15 @@ function CreateApartment(props) {
       price,
       area,
       country,
-      city,
+      city: cities,
       isFurnished,
       isPetFriendly,
+      images
     };
 
-    axios
-      .post(`${API_URL}/api/apartments`, apartmentObj, { headers: { Authorization: `Bearer ${storedToken}` } })
+
+    service
+      .createApartment(apartmentObj, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((res) => {
         console.log(res);
       })
@@ -56,10 +101,8 @@ function CreateApartment(props) {
         console.log("Error, ", e);
       });
     props.closePopUp();
-  };
 
-
-  //     <div className="smmax:w-[100vw] smmax:h-[100vh]  smmax:top-0 smmax:bottom-0 smmax:right-0 smmax:left-0 w-[30vw] h-[50vh] absolute border border-black text-black left-1/3 right-1/3 bottom-1/3 top-1/3 p-5 text-center m-auto rounded-lg bg-white">
+  }
 
   return (
     <div className=" top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
@@ -120,21 +163,33 @@ function CreateApartment(props) {
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">City</span></div>
-            <input className="input input-bordered w-full max-w-xs" type="text" name="city" value={city} required onChange={(e) => setCity(e.target.value)} /></label>
+            <input className="input input-bordered w-full max-w-xs" type="text" name="cities" value={cities} required onChange={(e) => setCities(e.target.value)} /></label>
 
           <label className="input flex items-center gap-2">
             Is it furnished?
-            <input type="checkbox" className="checkbox checkbox-accent" id="isFurnished" name="isFurnished" required checked={isFurnished} onChange={handleisFurnished} />
+            <input type="checkbox" className="checkbox checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
           </label>
 
           <label className="input flex items-center gap-2">
             Is it pet friendly?
-            <input type="checkbox" className="checkbox checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} required onChange={handleisPetFriendly} />
+            <input type="checkbox" className="checkbox checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
           </label>
           <label>
-          <DTPicker />
+            <DTPicker />
           </label>
-          <button type="submit" className="btn btn-outline btn-accent rounded-md"> Create </button>
+          <input type="file" multiple onChange={(e) => handleFileUpload(e)} />
+
+          {images && <ul>
+            {images.map((image, index) => (
+              <li key={index}>
+                <img className="w-10" src={image} alt="apartment-photo" />
+              </li>
+            ))}
+          </ul>}
+
+
+
+          <button type="submit" className="btn btn-outline btn-accent rounded-md" disabled={waitingForImageUrl}> Create </button>
         </form>
       </div >
     </div >

@@ -13,10 +13,14 @@ export default function ApartmentCard(props) {
                 <div className="grid grid-cols-3 p-2  h-full">
 
                     <div key={apartment._id} className="min-h-44 h-44  w-24 mx-auto">
-                        <img
-                            src={apartment.images}
-                            className="object-cover max-w-full max-h-full mx-auto"
-                        />
+
+                        <ul>
+                            {apartment.images.map((image, index) => (
+                                <li key={index}>
+                                    <img src={image} />
+                                </li>
+                            ))}
+                        </ul>
                         <h1 className="px-6 py-3 text-black text-left text-sm">
                             {apartment.apartmentType.toUpperCase()}
                         </h1>
