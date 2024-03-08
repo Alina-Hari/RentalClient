@@ -50,10 +50,10 @@ function ApartmentDetailsPage() {
             {apartment && (
                 <>
                     <h1>{apartment.apartmentType}</h1>
-                    <img
+                    {/* <img
                         src={apartment.images}
                         className="object-cover max-w-full max-h-full mx-auto"
-                    />
+                    /> */}
                     <p>{apartment.city}, {apartment.country}</p>
                     <p>${apartment.price}</p>
                     <p>{apartment.area}m2</p>

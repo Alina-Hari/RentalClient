@@ -1,6 +1,5 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import Navbar from './components/Navbar'
@@ -24,7 +23,6 @@ function App() {
         <Route path="/apartments/:apartmentId" element={<ApartmentDetailsPage />} />
         <Route path="/appoinments/" element={<AppoinmentListPage />} />
         <Route path="/test" element={<TestPage />} />
-
       </Routes>
     </>
   )

@@ -1,29 +1,36 @@
+import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const API_URL = import.meta.env.VITE_API_URL;
-const apartmentTypes = ["Studio", "Loft", "Duplex", "Apartment", "House"];
-import { useState } from "react";
-import DTPicker from "./DTPicker";
+import { useState, useMemo } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
 //const [images, setImages] = useState(""); // TODO add cloudynary
 //const [availableDates, setAvailableDates] = useState([]); // TODO calendar
 
 function CreateAppoinment(props) {
   const apartmentId = props.apartmentId;
   const navigate = useNavigate();
-
+  const dateNow = new Date(Date.now()).toISOString().slice(0, 10).toString();
   const storedUser = localStorage.getItem("user");
   const storedToken = localStorage.getItem("authToken");
-  console.log(storedUser)
+  const [appoinmentDate, setAppoinmentDate] = useState();
+  const [appoinmentTime, setAppoinmentTime] = useState();
+
+  const datesArray = {
+    endDate: "2024-03-22",
+    endTime: "05:32",
+    startDate: "2024-03-09",
+    startTime: "04:32"
+  };
+  const { startDate, startTime, endDate, endTime } = datesArray;
+  console.log({ startDate, startTime, endDate, endTime })
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const appoinmentObj = {
       apartmentId,
       // time,
-      userBooked : storedUser
+      userBooked: storedUser
     };
-
     axios
       .post(`${API_URL}/api/appoinments`, appoinmentObj, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((res) => {
@@ -35,6 +42,14 @@ function CreateAppoinment(props) {
     props.closePopUp();
   };
 
+  function handleAppoinmentDate(e) {
+    setAppoinmentDate(e.target.value)
+    console.log(e.target.value);
+  }
+  function handleAppoinmentTime(e) {
+    setAppoinmentTime(e.target.value)
+    console.log(e.target.value);
+  }
 
   //     <div className="smmax:w-[100vw] smmax:h-[100vh]  smmax:top-0 smmax:bottom-0 smmax:right-0 smmax:left-0 w-[30vw] h-[50vh] absolute border border-black text-black left-1/3 right-1/3 bottom-1/3 top-1/3 p-5 text-center m-auto rounded-lg bg-white">
 
@@ -47,7 +62,10 @@ function CreateAppoinment(props) {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-
+          <label> Select Appoinment date and time </label>
+          <input type="date" id="appoinmentDate" min={startDate} max={endDate} onChange={handleAppoinmentDate} />
+          <input type="time" id="appoinmentTime" min={startTime} max={endTime} onChange={handleAppoinmentTime} />
+          <span className="validity"></span>
           <button type="submit" className="btn btn-outline btn-accent rounded-md"> Book </button>
         </form>
       </div >
