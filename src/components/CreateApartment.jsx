@@ -22,7 +22,7 @@ function CreateApartment(props) {
   const [images, setImages] = useState([]);
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [locationData, setLocationData] = useState([])
-
+  const [filteredCountry, setFilteredCountry] = useState(null)
 
   useEffect(() => {
     axios.get(COUTRIES_AND_CITIES_API)
@@ -104,6 +104,18 @@ function CreateApartment(props) {
 
   }
 
+
+  const handleCountry = (e) => {
+
+    let tempArray = locationData.filter((location) => {
+      return location.country === e.target.value;
+    })
+
+    setFilteredCountry(tempArray.cities)
+    setCountry(e.target.value)
+    console.log(tempArray);
+  }
+
   return (
     <div className=" top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
       <div className="bg-white rounded-lg shadow-lg p-6">
@@ -155,7 +167,7 @@ function CreateApartment(props) {
               <span className="label-text">Price</span></div>
             <input className="input input-bordered w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
 
-          <label className="form-control w-full max-w-xs">
+          {/* <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Country</span></div>
             <input className="input input-bordered w-full max-w-xs" type="text" name="country" value={country} required onChange={(e) => setCountry(e.target.value)} /></label>
@@ -163,7 +175,38 @@ function CreateApartment(props) {
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">City</span></div>
-            <input className="input input-bordered w-full max-w-xs" type="text" name="cities" value={cities} required onChange={(e) => setCities(e.target.value)} /></label>
+            <input className="input input-bordered w-full max-w-xs" type="text" name="cities" value={cities} required onChange={(e) => setCities(e.target.value)} /></label> */}
+
+          {/* country */}
+
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Pick country</span>
+            </div>
+            <select className="select select-bordered" name="country" defaultValue={"default"} required onChange={handleCountry}>
+              <option disabled>Pick one</option>
+              {locationData.map((location, index) => {
+                return <option key={index} value={location.country}>{location.country}</option>
+              })}
+            </select>
+          </label>
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Pick city</span>
+            </div>
+            {(filteredCountry === null || filteredCountry === undefined) ? <span>Loading</span> : (<select className="select select-bordered" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
+              <option disabled>Pick one</option>
+              {filteredCountry.map((city, index) => {
+                console.log(city)
+                return <option key={index} value={city}>{city}</option>
+              }
+              )}
+            </select>)}
+
+          </label>
+
 
           <label className="input flex items-center gap-2">
             Is it furnished?
