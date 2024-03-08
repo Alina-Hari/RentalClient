@@ -12,7 +12,7 @@ import AppoinmentListPage from './pages/AppoinmentListPage'
 function App() {
 
   return (
-    <>
+    <div className="h-screen w-screen p-5 overflow-hidden" >
       <Navbar />
 
       <Routes>
@@ -24,7 +24,7 @@ function App() {
         <Route path="/appoinments/" element={<AppoinmentListPage />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
-    </>
+    </div>
   )
 }
 

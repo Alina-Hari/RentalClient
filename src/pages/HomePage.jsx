@@ -1,7 +1,6 @@
 export default function HomePage() {
     return (
-        <>
-            <h1>Home</h1>
-        </>
+        <div className="w-full h-full">
+        </div>
     )
 }
