@@ -12,7 +12,7 @@ function LoginPage(props) {
 
     const navigate = useNavigate();
 
-    const { storeToken, authenticateUser ,storeUser } = useContext(AuthContext);
+    const { storeToken, authenticateUser, storeUser } = useContext(AuthContext);
 
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
@@ -27,7 +27,7 @@ function LoginPage(props) {
                 console.log("JWT token", response.data.authToken);
                 console.log("Response", response.data.payload);
 
-                storeUser(response.data.payload._id);
+                storeUser(response.data.payload);
                 storeToken(response.data.authToken);
                 authenticateUser();
                 navigate("/");
@@ -39,27 +39,47 @@ function LoginPage(props) {
     };
 
     return (
-        <div className="LoginPage">
-            <h1>Login</h1>
+        <div className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Login</h1>
+                    <p className="py-6">Login to schedule visits effortlessly and find your dream apartment with ease.</p>
+                </div>
+                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-xl">
+                    <form className="card-body" onSubmit={handleLoginSubmit}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                                <input type="email" placeholder="email" name="email" required value={email} className="input input-bordered" onChange={handleEmail} />
+                            </label>
+                        </div>
+                        <div className="form-control">
 
-            <form onSubmit={handleLoginSubmit}>
-                <label>Email:</label>
-                <input type="email" name="email" value={email} onChange={handleEmail} />
+                            <label className="label">
+                                <span className="label-text">Password</span>
 
-                <label>Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={handlePassword}
-                />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="password"
+                                    value={password}
+                                    onChange={handlePassword}
+                                    required
+                                    className="input input-bordered"
+                                />
+                            </label>
+                        </div>
 
-                <button type="submit">Login</button>
-            </form>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
+                        <button className="btn btn-primary rounded-xl mt-5" type="submit">Login</button>
+                    </form>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-            <p>Don't have an account yet?</p>
-            <Link to={"/signup"}> Sign Up</Link>
+                    <div className="flex flex-col align-middle items-center mb-5 justify-center">
+                        <p>Don't have an account yet?</p>
+                        <Link to={"/signup"}>Sign Up</Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

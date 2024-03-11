@@ -18,7 +18,7 @@ function SignupPage(props) {
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
     const handleName = (e) => setName(e.target.value);
-    const handleAgentCheckbox = (e) => { // TODO checkbox fix
+    const handleAgentCheckbox = (e) => {
         setIsAgent(!isAgent)
         console.log(isAgent)
     }
@@ -35,52 +35,79 @@ function SignupPage(props) {
             .catch((error) => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
-            }) // TODO checkbox
+            })
     };
 
 
     return (
-        <div className="SignupPage">
-            <h1>Sign Up</h1>
+        <div className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Sign Up</h1>
+                    <p className="py-6">Sign up now to start booking visits. Got an apartment to rent out? Register today to list your property, manage bookings, and reach potential tenants more efficiently.</p>
+                </div>
+                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-xl">
 
-            <form onSubmit={handleSignupSubmit}>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={handleEmail}
-                />
+                    <form className="card-body" onSubmit={handleSignupSubmit}>
 
-                <label>Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={handlePassword}
-                />
+                        <label className="label">
+                            <span className="label-text">Name</span>
 
-                <label>Name:</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={handleName}
-                />
+                            <input
+                                type="text"
+                                name="name"
+                                value={name}
+                                onChange={handleName}
+                                required
+                                className="input input-bordered"
+                            />
+                        </label>
 
-                <label>Check the box if you are an agent
-                    <input type="checkbox" id="isAgent" name="isAgent" checked={isAgent}
-                        onChange={handleAgentCheckbox}
-                    />
-                </label>
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                            <input
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={handleEmail}
+                                className="input input-bordered"
+                                placeholder="email"
+                                required
+                            />
+                        </label>
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                            <input
+                                type="password"
+                                name="password"
+                                value={password}
+                                onChange={handlePassword}
+                                required
+                                className="input input-bordered"
+                            />
+                        </label>
 
-                <button type="submit">Sign Up</button>
-            </form>
 
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
+                        <label className="flex gap-1 items-center">
+                            <input type="checkbox" id="isAgent" className="checkbox checkbox-xs checkbox-accent" name="isAgent" checked={isAgent}
+                                onChange={handleAgentCheckbox}
+                            />
+                            <span className="label-text">I'm an agent</span>
 
-            <p>Already have account?</p>
-            <Link to={"/login"}> Login</Link>
+                        </label>
+
+                        <button className="btn btn-primary rounded-xl mt-5" type="submit">Sign Up</button>
+                    </form>
+
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+                    <div className="flex flex-col align-middle items-center mb-5 justify-center">
+                        <p>Already have account?</p>
+                        <Link to={"/login"}> Login</Link>
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

@@ -12,7 +12,6 @@ const errorHandler = (err) => {
     throw err;
 };
 
-
 const uploadImage = (file) => {
     return api.post("/upload", file)
         .then(res => res.data)
@@ -26,7 +25,6 @@ const createApartment = (newApartment) => {
 };
 
 export default {
-    // getMovies,
     uploadImage,
     createApartment
 };

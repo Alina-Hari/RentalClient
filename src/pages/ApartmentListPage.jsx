@@ -37,16 +37,16 @@ export default function ApartmentListPage() {
         else {
             queryString = "country=";
         }
-    
-    axios
-        .get(`${API_URL}/api/search?${queryString}${value}`)
-        .then((response) => {
-            setApartments(response.data)
-            console.log(response.data)
-        })
-        .catch((error) => {
-            console.log(error)
-        });
+
+        axios
+            .get(`${API_URL}/api/search?${queryString}${value}`)
+            .then((response) => {
+                setApartments(response.data)
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
 
     }
     return (
@@ -64,11 +64,15 @@ export default function ApartmentListPage() {
                         apartments.map((apartment) => {
                             return <ApartmentCard key={apartment._id} value={apartment} />
                         })}
-                        {apartments.length === 0 && <p>No rentals in this location</p>}
+                    {apartments.length === 0 && <p>No rentals in this location</p>}
 
                 </div>
+                {open ? <div className="absolute  top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+                    <CreateApartment closePopUp={() => setOpen(false)} />
+                </div> : null}
 
             </div>
+
         </div>
 
     )

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-export default function DTPicker() {
-  
+export default function DTPicker({ setAvailableDates }) {
+
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [startTime, setStartTime] = useState();
@@ -16,15 +16,21 @@ export default function DTPicker() {
 
   function addDateTime() {
     if (endDate > startDate && endTime > startTime) {
-      newDate.push({ startDate, endDate , startTime , endTime });
-      setRange(newDate);
+      const startDateTime = new Date(startDate + 'T' + startTime);
+      const endDateTime = new Date(endDate + 'T' + endTime);
+
+      // Create a new array with Date objects
+      const newDates = [startDateTime, endDateTime];
+
+      setAvailableDates(newDates);
       setErrorMessage(false);
-      console.log(range)
-    }
-    else {
+      console.log(newDates);
+    } else {
       setErrorMessage(true);
     }
   }
+
+
 
   function handleStartDate(e) {
     setStartDate(e.target.value);
@@ -39,6 +45,8 @@ export default function DTPicker() {
   }
   function handleEndTime(e) {
     setEndTime(e.target.value);
+    addDateTime()
+
   }
 
   return (
@@ -49,7 +57,7 @@ export default function DTPicker() {
       </div>
       <div>
         <input type="time" id="startTime" max="21:00" onChange={handleStartTime} />
-        <input type="time" id="endTime"  disabled={disableTimeTwo} max="21:00" onChange={handleEndTime} />
+        <input type="time" id="endTime" disabled={disableTimeTwo} max="21:00" onChange={handleEndTime} />
       </div>
       {errorMessage && <p>Start date/time cannot be greater than end date/time</p>}
       <button onClick={addDateTime}>Add</button>

@@ -5,6 +5,10 @@ const apartmentTypes = ["Studio", "Loft", "Duplex", "Apartment", "House"];
 import { useEffect, useState } from "react";
 import DTPicker from "./DTPicker";
 import service from "../services/file-upload.service";
+import { MdOutlinePets } from "react-icons/md";
+import { FaCouch } from "react-icons/fa6";
+import { GiHouse } from "react-icons/gi";
+
 
 const COUTRIES_AND_CITIES_API = "https://countriesnow.space/api/v0.1/countries"
 
@@ -23,6 +27,8 @@ function CreateApartment(props) {
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [locationData, setLocationData] = useState([])
   const [filteredCountry, setFilteredCountry] = useState(null)
+  const [availableDates, setAvailableDates] = useState({})
+
 
   useEffect(() => {
     axios.get(COUTRIES_AND_CITIES_API)
@@ -88,7 +94,8 @@ function CreateApartment(props) {
       city: cities,
       isFurnished,
       isPetFriendly,
-      images
+      images,
+      availableDates
     };
 
 
@@ -119,10 +126,10 @@ function CreateApartment(props) {
 
 
   return (
-    <div className=" top-0 left-0 flex items-center justify-center w-full h-full bg-opacity-50 bg-black">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-opacity-50 bg-black">
+      <div className="bg-white rounded-xl shadow-lg p-5 max-w-md w-full mx-4 overflow-auto">
         <div className="card-actions justify-end">
-          <button onClick={props.closePopUp} type="button" className="btn btn-sm btn-circle btn-outline">
+          <button onClick={props.closePopUp} type="button" className="btn btn-xs btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
@@ -132,7 +139,7 @@ function CreateApartment(props) {
             <div className="label">
               <span className="label-text">Apartment Type</span>
             </div>
-            <select className="select select-bordered"
+            <select className="select select-bordered select-xs w-full max-w-xs"
               name="apartmentType"
               id="apartmentType"
               value={apartmentType}
@@ -152,41 +159,29 @@ function CreateApartment(props) {
             </select>
           </label>
 
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Floor</span>
-            </div>
-            <input className="input input-bordered w-full max-w-xs" type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} /></label>
+          <div className="flex gap-3">
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Floor</span>
+              </div>
+              <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} /></label>
 
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Area</span>
-            </div>
-            <input className="input input-bordered w-full max-w-xs" type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} /></label>
-
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Surface</span>
+              </div>
+              <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} /></label>
+          </div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Price</span></div>
-            <input className="input input-bordered w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
-
-          {/* <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Country</span></div>
-            <input className="input input-bordered w-full max-w-xs" type="text" name="country" value={country} required onChange={(e) => setCountry(e.target.value)} /></label>
-
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">City</span></div>
-            <input className="input input-bordered w-full max-w-xs" type="text" name="cities" value={cities} required onChange={(e) => setCities(e.target.value)} /></label> */}
-
-          {/* country */}
-
+            <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Pick country</span>
             </div>
-            <select className="select select-bordered" name="country" defaultValue={"default"} required onChange={handleCountry}>
+            <select className="select select-bordered select-xs w-full max-w-xs" name="country" defaultValue={"default"} required onChange={handleCountry}>
               <option disabled>Pick one</option>
               {locationData.map((location, index) => {
                 return <option key={index} value={location.country}>{location.country}</option>
@@ -198,7 +193,7 @@ function CreateApartment(props) {
             <div className="label">
               <span className="label-text">Pick city</span>
             </div>
-            {(filteredCountry === null || filteredCountry === undefined) ? <span>Loading</span> : (<select className="select select-bordered" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
+            {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs" disabled></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
               <option disabled>Pick one</option>
               {filteredCountry.map((city, index) => {
                 console.log(city)
@@ -209,33 +204,45 @@ function CreateApartment(props) {
 
           </label>
 
+          <div className="flex justify-between">
+            <label className="input flex items-center gap-2 text-sm p-0">
+              <FaCouch /> Furnished
+              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
+            </label>
 
-          <label className="input flex items-center gap-2">
-            Is it furnished?
-            <input type="checkbox" className="checkbox checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
-          </label>
+            <label className="input flex items-center gap-2 text-sm p-0">
+              <MdOutlinePets /> Pet friendly
+              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
+            </label>
+          </div>
 
-          <label className="input flex items-center gap-2">
-            Is it pet friendly?
-            <input type="checkbox" className="checkbox checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
-          </label>
           <label>
-            <DTPicker />
+            <DTPicker setAvailableDates={setAvailableDates} />
           </label>
-          <input type="file" multiple onChange={(e) => handleFileUpload(e)} />
 
-          {images && <ul>
-            {images.map((image, index) => (
-              <li key={index}>
-                <img className="w-10" src={image} alt="apartment-photo" />
-              </li>
-            ))}
-          </ul>}
+          <label className="form-control w-full max-w-xs mt-5">
+            <div>
+              <span className="label-text">Add photos</span>
+            </div>
+            <input className="file-input file-input-bordered file-input-xs w-full max-w-xs" type="file" multiple onChange={(e) => handleFileUpload(e)} />
+          </label>
 
 
+          <div className="avatar-group -space-x-6 rtl:space-x-reverse">
+            {images &&
+              (images.map((image, index) => (
+                <div key={index} className="avatar">
+                  <div className="w-12 rounded" >
+                    <img src={image} alt="apartment-photo" />
+                  </div>
+                </div>
+              ))
+              )}
+          </div>
 
-          <button type="submit" className="btn btn-outline btn-accent rounded-md" disabled={waitingForImageUrl}> Create </button>
-        </form>
+          <div className="w-full flex justify-center">
+            <button type="submit" className="btn btn-outline btn-accent rounded-lg mt-5 items-center" disabled={waitingForImageUrl}>Create</button>
+          </div></form>
       </div >
     </div >
   );
