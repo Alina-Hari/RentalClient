@@ -6,12 +6,11 @@ export default function DTPicker({ setAvailableDates }) {
   const [endDate, setEndDate] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  const [range, setRange] = useState([]);
-  const newDate = range;
   const dateNow = new Date(Date.now()).toISOString().slice(0, 10).toString();
   const [disableDateTwo, setDisableDateTwo] = useState(true);
   const [disableTimeTwo, setDisableTimeTwo] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [disableDatesBtn, setDisableDatesBtn] = useState(false);
 
 
   function addDateTime() {
@@ -21,17 +20,15 @@ export default function DTPicker({ setAvailableDates }) {
 
       // Create a new array with Date objects
       const newDates = [startDateTime, endDateTime];
-
       setAvailableDates(newDates);
       setErrorMessage(false);
+      setDisableDatesBtn(true)
       console.log(newDates);
     } else {
       setErrorMessage(true);
     }
+   
   }
-
-
-
   function handleStartDate(e) {
     setStartDate(e.target.value);
     setDisableDateTwo(false);
@@ -45,22 +42,32 @@ export default function DTPicker({ setAvailableDates }) {
   }
   function handleEndTime(e) {
     setEndTime(e.target.value);
-    addDateTime()
-
   }
-
+  function editDateTime() {
+    setDisableDatesBtn(false)
+    setStartDate();
+    setEndDate();
+    setStartTime();
+    setEndTime();
+    setDisableDateTwo(true)
+    setDisableTimeTwo(true);
+    setAvailableDates();
+  }
   return (
-    <div className="flex flex-row justify-start flex-wrap w-100 gap-16">
-      <div>
-        <input type="date" id="startDate" min={dateNow} onChange={handleStartDate} />
-        <input type="date" id="endDate" disabled={disableDateTwo} min={startDate} onChange={handleEndDate} />
+    <div className="flex flex-col  justify-start flex-wrap w-100 ">
+      <label>Date:</label>
+      <div className='h-[50%] p-4 flex flex-col py-4 md:flex-row'>
+        <label className='w-1/2 mr-2  py-2 font-bold' >From:  <input type="date" id="startDate" disabled={disableDatesBtn} min={dateNow} onChange={handleStartDate} /></label>
+        <label className='w-1/2  mr-2  py-2 font-bold'>To:  <input type="date" id="endDate" disabled={disableDateTwo || disableDatesBtn} min={startDate} onChange={handleEndDate} /></label>
       </div>
-      <div>
-        <input type="time" id="startTime" max="21:00" onChange={handleStartTime} />
-        <input type="time" id="endTime" disabled={disableTimeTwo} max="21:00" onChange={handleEndTime} />
+      <label>Time:</label>
+      <div className='h-[50%] p-4 flex flex-col md:flex-row'>
+        <label className='w-1/2 mr-2  py-2 font-bold'>From:  <input type="time" id="startTime" disabled={disableDatesBtn} onChange={handleStartTime} /></label>
+        <label className='w-1/2 mr-2  py-2 font-bold'>To:  <input type="time" id="endTime" disabled={disableTimeTwo || disableDatesBtn} onChange={handleEndTime} /> </label>
       </div>
-      {errorMessage && <p>Start date/time cannot be greater than end date/time</p>}
-      <button onClick={addDateTime}>Add</button>
+      {errorMessage && <p className='error'>Select all date and time values (**Start date/time cannot be greater than end date/time)</p>}
+      {!disableDatesBtn && <button type="button" className='btn btn-outline btn-accent w-[30%] ml-[30%] rounded-lg items-center' onClick={addDateTime}>Add Dates</button>}
+      {disableDatesBtn && <button type="button" className='btn btn-outline btn-accent w-[30%] ml-[30%] rounded-lg items-center' onClick={editDateTime}>Edit Dates</button>}
     </div>
 
   );

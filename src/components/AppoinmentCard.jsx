@@ -10,7 +10,7 @@ export default function AppoinmentCard(props) {
     const storedIsAgent = localStorage.getItem('isAgent')
 
     return (
-        <div className="max-w-md md:mx-0  bg-white w-full mb-10 md:w-[30%] flex flex-col justify-center rounded-xl shadow-md overflow-hidden md:max-w-2xl mr-10 ">
+        <div className="max-w-md md:mx-0  bg-white w-full mb-10 md:w-[40%]  flex flex-col justify-center md:flex-row md:justify-around rounded-xl shadow-md overflow-hidden md:max-w-2xl mr-10 ">
             <div className="p-8">
                 <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Adress,City</div>
                 <p className="block mt-1 text-lg leading-tight font-medium text-black">Appointment Time: {time}</p>

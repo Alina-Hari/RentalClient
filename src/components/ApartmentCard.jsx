@@ -14,7 +14,6 @@ export default function ApartmentCard(props) {
     return (
         <Link to={`/apartments/${apartmentId}`}>
             <div className="rounded-xl card lg:card-side bg-base-100 shadow-xl text-sm lg:text-lg my-3">
-
                 <div className="h-45 w-96 p-2 ">
                     {apartment.images &&
                         (<div className="w-full carousel rounded-box">

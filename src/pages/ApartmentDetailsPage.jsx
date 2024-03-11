@@ -62,10 +62,10 @@ function ApartmentDetailsPage() {
     }
 
     return (
-        <div className="m-5">
+        <div className=" h-[100%] w-full">
             {apartment && (
                 <>
-                    <div className="relative">
+                    <div className="relative h-[80%]">
                         <Link className="absolute top-5 left-5 md:hidden" to="/apartments">
                             <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
                         </Link>
@@ -83,14 +83,14 @@ function ApartmentDetailsPage() {
                             })}
                         </div>
 
-                        <div className="md:flex flex-row-reverse justify-between">
-                            <div className="hidden w-1/2 h-screen md:flex flex-col">
+                        <div className="h-[100%] md:flex flex-row-reverse justify-between">
+                            <div className="hidden w-1/2  md:flex flex-col">
 
                                 <div className="relative">
                                     <Link className="absolute top-5 left-5" to="/apartments">
                                         <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
                                     </Link>
-                                    <div className="w-full h-80" >
+                                    <div className="w-full h-[80%]" >
                                         <img
                                             src={apartment.images[0]}
                                             className="object-cover w-full h-full mx-auto rounded-xl"
@@ -183,7 +183,7 @@ function ApartmentDetailsPage() {
 
 
             {/* for user */}
-            <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            <div className="h-[20%] flex justify-between align-middle items-center  w-full bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <p className="font-medium">$ {apartment && apartment.price} / month</p>
                 <button
                     onClick={openAppoinmentPopUp}

@@ -11,6 +11,7 @@ import AppoinmentListPage from './pages/AppoinmentListPage'
 import Footer from './components/Footer'
 import AboutPage from './pages/AboutPage'
 import NotFoundPage from './pages/NotFoundPage'
+import UserProfilePage from './pages/UserProfilePage'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/appoinments/" element={<AppoinmentListPage />} />
           <Route path="/test" element={<TestPage />} />  
           <Route path="/about" element={<AboutPage />}/>
+          <Route path="/userprofile" element={<UserProfilePage />}/>
           <Route path="*" element={<NotFoundPage />}/>
           </Routes>
       </div>

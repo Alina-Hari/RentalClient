@@ -126,8 +126,8 @@ function CreateApartment(props) {
 
 
   return (
-    <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-opacity-50 bg-black">
-      <div className="bg-white rounded-xl shadow-lg p-5 max-w-md w-full mx-4 overflow-auto">
+    <div className="w-full h-[90%] flex items-center justify-center  bg-opacity-50 bg-black">
+      <div className="bg-white rounded-xl shadow-lg h-[80%] p-5  w-[80%] md:w-[50%] mx-4 my-2 overflow-auto">
         <div className="card-actions justify-end">
           <button onClick={props.closePopUp} type="button" className="btn btn-xs btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -204,7 +204,7 @@ function CreateApartment(props) {
 
           </label>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between p-2">
             <label className="input flex items-center gap-2 text-sm p-0">
               <FaCouch /> Furnished
               <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
@@ -215,10 +215,12 @@ function CreateApartment(props) {
               <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
             </label>
           </div>
-
-          <label>
-            <DTPicker setAvailableDates={setAvailableDates} />
+          <div className="flex flex-col justify-between border-black border-2 rounded-lg px-5 py-7">
+          <label  className="form-control w-full mb-2">
+          Select Dates for Rentee visits
           </label>
+          <DTPicker setAvailableDates={setAvailableDates} />           
+          </div>
 
           <label className="form-control w-full max-w-xs mt-5">
             <div>
@@ -226,8 +228,6 @@ function CreateApartment(props) {
             </div>
             <input className="file-input file-input-bordered file-input-xs w-full max-w-xs" type="file" multiple onChange={(e) => handleFileUpload(e)} />
           </label>
-
-
           <div className="avatar-group -space-x-6 rtl:space-x-reverse">
             {images &&
               (images.map((image, index) => (
@@ -239,7 +239,6 @@ function CreateApartment(props) {
               ))
               )}
           </div>
-
           <div className="w-full flex justify-center">
             <button type="submit" className="btn btn-outline btn-accent rounded-lg mt-5 items-center" disabled={waitingForImageUrl}>Create</button>
           </div></form>

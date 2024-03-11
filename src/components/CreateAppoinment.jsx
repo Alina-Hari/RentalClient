@@ -58,7 +58,7 @@ function CreateAppoinment(props) {
 
   return (
     <div className="flex flex-column text-xl items-center justify-center w-full h-full bg-opacity-50 bg-black ">
-      <div className="bg-white rounded-lg shadow-lg p-1/3 h-2/5 w-3/5  lg:w-2/5">   
+      <div className="bg-white rounded-lg shadow-lg p-1/3 h-2/5 w-3/5  lg:h-2/3 w-1/3">   
       <div className="mb-4 w-full">
       <button onClick={props.closePopUp} type="button" className="btn m-10 text-2xl btn-sm float-right hover:text-white bg-white hover:bg-black justify-end">
           <ImCancelCircle />
@@ -82,7 +82,7 @@ function CreateAppoinment(props) {
               min={startTime} max={endTime} onChange={handleAppoinmentTime} />
             <span className="validity"></span>
           </div>
-          <div className="mx-[40%] my-20 ">
+          <div className="absolute left-[45%] md:left-[48%] ">
             <button className="bg-black text-white font-bold py-2 px-4 rounded hover:bg-gray-300" type="submit">
               Book
             </button>
