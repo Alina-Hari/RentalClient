@@ -62,7 +62,7 @@ function ApartmentDetailsPage() {
     }
 
     return (
-        <div className=" h-[100%] w-full">
+        <div className="h-[100%] w-full overflow-y-scroll md:overflow-y-hidden">
             {apartment && (
                 <>
                     <div className="relative h-[80%]">
