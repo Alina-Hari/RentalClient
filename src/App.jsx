@@ -8,22 +8,29 @@ import ApartmentListPage from './pages/ApartmentListPage'
 import ApartmentDetailsPage from './pages/ApartmentDetailsPage'
 import TestPage from './pages/TestPage'
 import AppoinmentListPage from './pages/AppoinmentListPage'
+import Footer from './components/Footer'
+import AboutPage from './pages/AboutPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
 
   return (
-    <div className="h-screen w-screen p-5 overflow-hidden" >
+    <div className="h-screen w-screen  overflow-hidden" >
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/apartments" element={<ApartmentListPage />} />
-        <Route path="/apartments/:apartmentId" element={<ApartmentDetailsPage />} />
-        <Route path="/appoinments/" element={<AppoinmentListPage />} />
-        <Route path="/test" element={<TestPage />} />
-      </Routes>
+      <div className='h-[80%] p-5'>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/apartments" element={<ApartmentListPage />} />
+          <Route path="/apartments/:apartmentId" element={<ApartmentDetailsPage />} />
+          <Route path="/appoinments/" element={<AppoinmentListPage />} />
+          <Route path="/test" element={<TestPage />} />  
+          <Route path="/about" element={<AboutPage />}/>
+          <Route path="*" element={<NotFoundPage />}/>
+          </Routes>
+      </div>
+      <Footer />
     </div>
   )
 }
