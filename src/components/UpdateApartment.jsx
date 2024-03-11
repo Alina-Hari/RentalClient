@@ -17,7 +17,7 @@ function UpdateApartment(props) {
   const [isAvailable, setIsAvailable] = useState(apartment.isAvailable)
   const [availableDates, setAvailableDates] = useState(apartment.availableDates)
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(apartment.images);
 
 
   const navigate = useNavigate();
@@ -52,8 +52,6 @@ function UpdateApartment(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-
 
     const apartmentObj = {
       apartmentType,
@@ -164,8 +162,8 @@ function UpdateApartment(props) {
           </label>
 
           <div className="avatar-group -space-x-6 rtl:space-x-reverse">
-            {apartment.images &&
-              (apartment.images.map((image, index) => (
+            {images &&
+              (images.map((image, index) => (
                 <div key={index} className="avatar">
                   <div className="w-12 rounded" >
                     <img src={image} alt="apartment-photo" />
@@ -176,7 +174,7 @@ function UpdateApartment(props) {
           </div>
 
           <div className="w-full flex justify-center">
-            <button type="submit" className="btn btn-outline btn-accent rounded-lg mt-5 items-center"> Edit </button>
+            <button type="submit" disabled={waitingForImageUrl} className="btn btn-outline btn-accent rounded-lg mt-5 items-center"> Edit </button>
           </div >
 
         </form>

@@ -4,6 +4,8 @@ import ApartmentCard from "../components/ApartmentCard";
 import CreateApartment from "../components/CreateApartment";
 import SearchBy from "../components/SearchBy";
 const API_URL = import.meta.env.VITE_API_URL;
+import { BsHouseAddFill } from "react-icons/bs";
+
 
 export default function ApartmentListPage() {
 
@@ -50,14 +52,16 @@ export default function ApartmentListPage() {
 
     }
     return (
-        <div className="flex flex-col gap-3">
+        <div className="relative h-full flex flex-col  gap-3">
             <SearchBy callBack={searchByLocation} />
             <div className="flex justify-between items-center">
                 {apartments === null &&
                     <p>Loading</p>}
                 <div>
-                    <button onClick={openPopUp}>New Rental</button>
-                    {open ? <div className="absolute  top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+                    <button className="btn bg-white rounded-xl" onClick={openPopUp}>
+                        <BsHouseAddFill />
+                        New Rental</button>
+                    {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                         <CreateApartment closePopUp={() => setOpen(false)} />
                     </div> : null}
                     {apartments !== null &&
