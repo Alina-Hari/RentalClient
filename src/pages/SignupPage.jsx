@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function SignupPage(props) {
     const [email, setEmail] = useState("");
@@ -40,7 +40,7 @@ function SignupPage(props) {
 
 
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero h-full">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Sign Up</h1>
