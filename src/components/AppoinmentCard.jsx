@@ -31,9 +31,9 @@ export default function AppoinmentCard(props) {
                 <button className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     <Link to={`/apartments/${apartmentId}`} ><ImHome3 /></Link>
                 </button>
-                <button className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                {storedIsAgent === "false" &&<button className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
                     <ImBin />
-                </button>
+                </button>}
             </div>
         </div>
 

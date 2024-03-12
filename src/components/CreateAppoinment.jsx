@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function CreateAppoinment(props) {
   const apartmentId = props.apartmentId;
+  // const availableDates = props.availableDates[0];
   const navigate = useNavigate();
   const dateNow = new Date(Date.now()).toISOString().slice(0, 10).toString();
   const storedUser = localStorage.getItem("user");
