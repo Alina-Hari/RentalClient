@@ -18,6 +18,7 @@ function UpdateApartment(props) {
   const [availableDates, setAvailableDates] = useState(apartment.availableDates)
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [images, setImages] = useState(apartment.images);
+  const [address, setAddress] = useState(apartment.address);
 
 
   const navigate = useNavigate();
@@ -64,7 +65,8 @@ function UpdateApartment(props) {
       isPetFriendly,
       isAvailable,
       availableDates,
-      images
+      images,
+      address
     };
 
     axios
@@ -81,7 +83,7 @@ function UpdateApartment(props) {
 
 
   return (
-    <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-opacity-50 bg-black">
+    <div className="w-full h-[90%] flex items-center justify-center bg-opacity-50 bg-black">
       <div className="bg-white rounded-xl shadow-lg p-5 max-w-md w-full mx-4 overflow-auto">
         <div className="card-actions justify-end">
           <button onClick={props.closePopUp} type="button" className="btn btn-xs btn-circle">
@@ -113,6 +115,13 @@ function UpdateApartment(props) {
               })}
             </select>
           </label>
+
+          {address && (<label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Address</span>
+            </div>
+            <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} /></label>)
+          }
 
           <div className="flex gap-3">
             <label className="form-control w-1/2 max-w-xs">

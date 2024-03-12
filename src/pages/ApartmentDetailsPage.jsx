@@ -9,6 +9,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { MdOutlinePets } from "react-icons/md";
 import { FaCouch } from "react-icons/fa6";
 import { GiHouse } from "react-icons/gi";
+import { FaCalendarAlt } from "react-icons/fa";
 
 
 
@@ -90,7 +91,7 @@ function ApartmentDetailsPage() {
                                     <Link className="absolute top-5 left-5" to="/apartments">
                                         <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
                                     </Link>
-                                    <div className="w-full h-[80%]" >
+                                    <div className="w-full h-full" >
                                         <img
                                             src={apartment.images[0]}
                                             className="object-cover w-full h-full mx-auto rounded-xl"
@@ -102,7 +103,7 @@ function ApartmentDetailsPage() {
                                     {apartment.images.map((image, index) => {
                                         if (index % 3 === 1 || index % 3 === 2) {
                                             return (
-                                                <div className="w-1/2 h-40 mt-2" key={index}>
+                                                <div className="w-1/2 h-52 mt-2" key={index}>
                                                     <img
                                                         src={image}
                                                         className="object-cover w-full h-full mx-auto rounded-xl"
@@ -156,11 +157,9 @@ function ApartmentDetailsPage() {
 
 
             {/* for agent */}
-            {/* <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
-                {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                    <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
-                </div> : null}
+
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openAlert}>Delete</button>
                 {alert && (
                     <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-opacity-50 bg-black">
@@ -179,15 +178,21 @@ function ApartmentDetailsPage() {
                         </div>
                     </div>
                 )}
-            </div> */}
+            </div>
+
+            {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
+            </div> : null}
 
 
             {/* for user */}
-            <div className="h-[20%] flex justify-between align-middle items-center  w-full bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            {/* <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <p className="font-medium">$ {apartment && apartment.price} / month</p>
                 <button
                     onClick={openAppoinmentPopUp}
-                    className="btn btn-outline btn-accent rounded-xl">
+                    className="btn btn-active btn-accent rounded-xl">
+                    <FaCalendarAlt />
+
                     Book a visit now
                 </button>
             </div>
@@ -195,7 +200,7 @@ function ApartmentDetailsPage() {
                 openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                     <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} />
                 </div> : null
-            }
+            } */}
         </div>
     );
 }

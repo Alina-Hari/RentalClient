@@ -36,7 +36,11 @@ function Navbar() {
                     {isLoggedIn && (
                         <>
                             <button onClick={logOutUser}>Logout</button>
-                            <Link to='/userprofile'><span>{user && user.name}</span></Link>
+                            <div className="avatar">
+                                <div className="w-8 bg-accent mask mask-hexagon ">
+                                    <Link to='/userprofile'><span className="text-white pl-3 text-center align-middle">{user && user.name[0]}</span></Link>
+                                </div>
+                            </div>
                         </>
                     )}
 

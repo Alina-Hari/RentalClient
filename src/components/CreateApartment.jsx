@@ -28,6 +28,7 @@ function CreateApartment(props) {
   const [locationData, setLocationData] = useState([])
   const [filteredCountry, setFilteredCountry] = useState(null)
   const [availableDates, setAvailableDates] = useState({})
+  const [address, setAddress] = useState("")
 
 
   useEffect(() => {
@@ -41,9 +42,12 @@ function CreateApartment(props) {
 
         })
         setLocationData(tempArray)
+
         console.log(tempArray);
       })
-
+      .then(() => {
+        handleCountry()
+      })
   }, [])
 
 
@@ -95,7 +99,8 @@ function CreateApartment(props) {
       isFurnished,
       isPetFriendly,
       images,
-      availableDates
+      availableDates,
+      address
     };
 
 
@@ -112,16 +117,15 @@ function CreateApartment(props) {
   }
 
 
-  const handleCountry = (e) => {
+  const handleCountry = () => {
     let tempArray = locationData.filter((location) => {
-      return location.country === e.target.value;
+      return location.country === "Netherlands";
     });
 
     console.log('Filtered Country:', tempArray);
 
     setFilteredCountry(tempArray.length > 0 ? tempArray[0].cities : null);
     console.log('Filtered Cities:', filteredCountry);
-    setCountry(e.target.value);
   };
 
 
@@ -179,21 +183,9 @@ function CreateApartment(props) {
 
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Pick country</span>
-            </div>
-            <select className="select select-bordered select-xs w-full max-w-xs" name="country" defaultValue={"default"} required onChange={handleCountry}>
-              <option disabled>Pick one</option>
-              {locationData.map((location, index) => {
-                return <option key={index} value={location.country}>{location.country}</option>
-              })}
-            </select>
-          </label>
-
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
               <span className="label-text">Pick city</span>
             </div>
-            {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs" disabled></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
+            {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs"></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
               <option disabled>Pick one</option>
               {filteredCountry.map((city, index) => {
                 console.log(city)
@@ -201,8 +193,13 @@ function CreateApartment(props) {
               }
               )}
             </select>)}
-
           </label>
+
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Address</span>
+            </div>
+            <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
 
           <div className="flex justify-between p-2">
             <label className="input flex items-center gap-2 text-sm p-0">
@@ -216,10 +213,10 @@ function CreateApartment(props) {
             </label>
           </div>
           <div className="flex flex-col justify-between border-black border-2 rounded-lg px-5 py-7">
-          <label  className="form-control w-full mb-2">
-          Select Dates for Rentee visits
-          </label>
-          <DTPicker setAvailableDates={setAvailableDates} />           
+            <label className="form-control w-full mb-2">
+              Select Dates for Rentee visits
+            </label>
+            <DTPicker setAvailableDates={setAvailableDates} />
           </div>
 
           <label className="form-control w-full max-w-xs mt-5">
