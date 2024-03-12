@@ -20,8 +20,8 @@ const uploadImage = (file) => {
         .catch(errorHandler);
 };
 
-const createApartment = (newApartment) => {
-    return api.post("/apartments", newApartment)
+const createApartment = (newApartment, authObj) => {
+    return api.post("/apartments", newApartment, authObj)
         .then(res => res.data)
         .catch(errorHandler);
 };
