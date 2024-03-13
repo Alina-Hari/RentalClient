@@ -18,6 +18,7 @@ function UpdateApartment(props) {
   const [availableDates, setAvailableDates] = useState(apartment.availableDates)
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [images, setImages] = useState(apartment.images);
+  const [description, setDescription] = useState(apartment.description);
   const [address, setAddress] = useState(apartment.address);
   const storedToken = localStorage.getItem("authToken");
   const navigate = useNavigate();
@@ -66,12 +67,14 @@ function UpdateApartment(props) {
       isAvailable,
       availableDates,
       images,
-      address
+      address,
+      description
     };
 
     axios
       .put(`${API_URL}/api/apartments/${apartment._id}`, apartmentObj, { headers: { Authorization: `Bearer ${storedToken}` } }, { new: true })
       .then((res) => {
+        props.callBack();
         console.log(res);
       })
       .catch((e) => {
@@ -142,6 +145,15 @@ function UpdateApartment(props) {
               <span className="label-text">Price</span></div>
             <input className="input input-bordered w-full input-xs max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
 
+
+          <label className="form-control">
+            <div className="label">
+              <span className="label-text">Description</span>
+            </div>
+            <textarea className="textarea textarea-bordered h-24" placeholder="Description" type="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div className="label">
+            </div>
+          </label>
 
           <div className="flex justify-between">
 

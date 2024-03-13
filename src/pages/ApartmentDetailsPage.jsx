@@ -1,4 +1,4 @@
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import UpdateApartment from "../components/UpdateApartment";
@@ -12,7 +12,7 @@ import { GiHouse } from "react-icons/gi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { AuthContext } from "../context/auth.context";
 
-function ApartmentDetailsPage() {
+function ApartmentDetailsPage(props) {
     const [apartment, setApartment] = useState(null);
     const { apartmentId } = useParams();
     const [open, setOpen] = useState(false);
@@ -23,13 +23,15 @@ function ApartmentDetailsPage() {
     const storedIsAgent = localStorage.getItem("isAgent");
     const { isLoggedIn } = useContext(AuthContext);
 
+    props.getId(apartmentId)
+
     const getApartment = () => {
         axios
             .get(`${API_URL}/api/apartments/${apartmentId}`)
             .then((response) => {
                 setApartment(response.data);
                 console.log("Responce appartment", response);
-                console.log("isAvailable",response.data.isAvailable)
+                console.log("isAvailable", response.data.isAvailable)
             })
             .catch((error) => console.log(error));
     };
@@ -67,7 +69,7 @@ function ApartmentDetailsPage() {
         axios
             .delete(`${API_URL}/api/delete?apartmentId=${apartmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((res) => {
-              console.log(`Appoinments are deleted for ${apartmentId}`, res);
+                console.log(`Appoinments are deleted for ${apartmentId}`, res);
             })
             .catch((e) => {
                 console.log("Error, ", e);
@@ -141,14 +143,13 @@ function ApartmentDetailsPage() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1 mt-5 md:ml-5 md:mt-0">
-                                <h1 className="card-title md:text-2xl">
+                                <h1 className="card-title md:text-4xl">
                                     {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
                                 </h1>
                                 {!(apartment.isAvailable) && <span className="text-blue-700 text-xl w-auto">In escrow</span>}
 
-                                <p className="flex items-center gap-2"><CiLocationOn />{apartment.city}, {apartment.country}</p>
-                                <p className="font-medium">$ {apartment.price} / month</p>
-
+                                <p className="flex items-center gap-2 text-slate-500 " ><CiLocationOn />{apartment.address}, {apartment.city}, {apartment.country}</p>
+                                <p className="font-medium mt-5 text-xl">$ {apartment.price} / month</p>
                                 {/* <div>
                                     <p>{apartment.availableDates && apartment.availableDates[0]}</p>
                                 </div> */}
@@ -157,13 +158,15 @@ function ApartmentDetailsPage() {
                                     <p className="flex items-center gap-2"><FaCouch /> {apartment.isFurnished ? "Furnished" : "Not furnished"}</p>
                                     <p className="flex items-center gap-2"><MdOutlinePets /> {apartment.isPetFriendly ? "Pet friendly" : "No pets allowed"}</p>
                                 </div>
+                                <p>{apartment.description}</p>
+
                             </div>
                         </div>
                     </div>
                 </>
             )}
             {/* for agent */}
-           { (isLoggedIn && storedIsAgent === "true" && apartment) &&<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            {(isLoggedIn && storedIsAgent === "true" && apartment) && <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
 
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openAlert}>Delete</button>
@@ -186,7 +189,7 @@ function ApartmentDetailsPage() {
                 )}
             </div>}
             {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
+                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} callBack={getApartment} />
             </div> : null}
             {/* for user */}
             {(isLoggedIn && storedIsAgent === "false" && apartment) && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
@@ -199,10 +202,10 @@ function ApartmentDetailsPage() {
                     Book a visit now
                 </button>
             </div>)}
-            { openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                    <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} />
-                </div> : null
-            } 
+            {openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+                <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} />
+            </div> : null
+            }
         </div>
     );
 }

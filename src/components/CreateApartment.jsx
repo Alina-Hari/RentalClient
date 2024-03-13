@@ -29,6 +29,7 @@ function CreateApartment(props) {
   // const [filteredCountry, setFilteredCountry] = useState(null)
   const [availableDates, setAvailableDates] = useState({})
   const [address, setAddress] = useState("")
+  const [description, setDescription] = useState("")
   const filteredCountry = cityData[0].cities;
 
   // useEffect(() => {
@@ -94,7 +95,7 @@ function CreateApartment(props) {
       floor,
       price,
       area,
-      country:"Netherlands",
+      country: "Netherlands",
       city: cities,
       isFurnished,
       isPetFriendly,
@@ -107,11 +108,13 @@ function CreateApartment(props) {
     service
       .createApartment(apartmentObj, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((res) => {
+        props.callBack()
         console.log(res);
       })
       .catch((e) => {
         console.log("Error, ", e);
       });
+
     props.closePopUp();
 
   }
@@ -199,6 +202,16 @@ function CreateApartment(props) {
               <span className="label-text">Address</span>
             </div>
             <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
+
+          <label className="form-control">
+            <div className="label">
+              <span className="label-text">Description</span>
+            </div>
+            <textarea className="textarea textarea-bordered h-24" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div className="label">
+            </div>
+          </label>
+
 
           <div className="flex justify-between p-2">
             <label className="input flex items-center gap-2 text-sm p-0">

@@ -55,16 +55,17 @@ export default function ApartmentListPage() {
     }
     return (
         <div className="relative h-full flex flex-col overflow-y-scroll gap-3">
-            <SearchBy callBack={searchByLocation} />
-            <div className="flex justify-between md:justify-center items-center">
+            <div className="flex justify-center align-middle flex-row ">
+                <SearchBy callBack={searchByLocation} /> {(isLoggedIn && storedIsAgent === "true") && <button className="btn bg-white rounded-xl ml-5" onClick={openPopUp}>
+                    <BsHouseAddFill />
+                    New Rental</button>}</div>
+            <div>
                 {apartments === null &&
                     <p>Loading</p>}
-                <div>
-                    {(isLoggedIn && storedIsAgent === "true")&& <button className="btn bg-white rounded-xl" onClick={openPopUp}>
-                        <BsHouseAddFill />
-                        New Rental</button>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-0 md:px-20 items-center">
+
                     {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                        <CreateApartment closePopUp={() => setOpen(false)} />
+                        <CreateApartment closePopUp={() => setOpen(false)} callBack={getApartments} />
                     </div> : null}
                     {apartments !== null &&
                         apartments.map((apartment) => {
@@ -73,10 +74,6 @@ export default function ApartmentListPage() {
                     {apartments.length === 0 && <p>No rentals in this location</p>}
 
                 </div>
-                {open ? <div className="absolute  top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                    <CreateApartment closePopUp={() => setOpen(false)} />
-                </div> : null}
-
             </div>
 
         </div>
