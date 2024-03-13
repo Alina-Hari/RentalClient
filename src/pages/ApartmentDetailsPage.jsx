@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import UpdateApartment from "../components/UpdateApartment";
@@ -10,8 +10,7 @@ import { MdOutlinePets } from "react-icons/md";
 import { FaCouch } from "react-icons/fa6";
 import { GiHouse } from "react-icons/gi";
 import { FaCalendarAlt } from "react-icons/fa";
-
-
+import { AuthContext } from "../context/auth.context";
 
 function ApartmentDetailsPage() {
     const [apartment, setApartment] = useState(null);
@@ -21,7 +20,8 @@ function ApartmentDetailsPage() {
     const [openAppoinment, setOpenAppoinment] = useState(false);
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken");
-
+    const storedIsAgent = localStorage.getItem("isAgent");
+    const { isLoggedIn } = useContext(AuthContext);
 
     const getApartment = () => {
         axios
@@ -127,9 +127,6 @@ function ApartmentDetailsPage() {
 
                                 </div>
                             </div>
-
-
-
                             <div className="flex flex-col gap-1 mt-5 md:ml-5 md:mt-0">
                                 <h1 className="card-title md:text-2xl">
                                     {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
@@ -140,8 +137,6 @@ function ApartmentDetailsPage() {
                                 {/* <div>
                                     <p>{apartment.availableDates && apartment.availableDates[0]}</p>
                                 </div> */}
-
-
                                 <div className="flex gap-5 bg-slate-100 rounded-xl p-3 justify-between">
                                     <p className="flex items-center gap-2"><GiHouse /> {apartment.area} m²</p>
                                     <p className="flex items-center gap-2"><FaCouch /> {apartment.isFurnished ? "Furnished" : "Not furnished"}</p>
@@ -150,14 +145,10 @@ function ApartmentDetailsPage() {
                             </div>
                         </div>
                     </div>
-
-
                 </>
             )}
-
-
             {/* for agent */}
-            <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+           { (isLoggedIn && storedIsAgent === "true") &&<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
 
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openAlert}>Delete</button>
@@ -178,29 +169,24 @@ function ApartmentDetailsPage() {
                         </div>
                     </div>
                 )}
-            </div>
-
+            </div>}
             {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                 <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
             </div> : null}
-
-
             {/* for user */}
-            {/* <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            {(isLoggedIn && storedIsAgent === "false") && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <p className="font-medium">$ {apartment && apartment.price} / month</p>
                 <button
                     onClick={openAppoinmentPopUp}
                     className="btn btn-active btn-accent rounded-xl">
                     <FaCalendarAlt />
-
                     Book a visit now
                 </button>
-            </div>
-            {
-                openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+            </div>)}
+            { openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                     <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} />
                 </div> : null
-            } */}
+            } 
         </div>
     );
 }

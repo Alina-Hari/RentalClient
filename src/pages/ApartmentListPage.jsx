@@ -1,16 +1,18 @@
 import axios from "axios"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ApartmentCard from "../components/ApartmentCard";
 import CreateApartment from "../components/CreateApartment";
 import SearchBy from "../components/SearchBy";
 const API_URL = import.meta.env.VITE_API_URL;
 import { BsHouseAddFill } from "react-icons/bs";
-
+import { AuthContext } from "../context/auth.context";
 
 export default function ApartmentListPage() {
 
     const [apartments, setApartments] = useState([])
     const [open, setOpen] = useState(false);
+    const { isLoggedIn } = useContext(AuthContext);
+    const storedIsAgent = localStorage.getItem("isAgent");
 
     const getApartments = () => {
         axios
@@ -58,9 +60,9 @@ export default function ApartmentListPage() {
                 {apartments === null &&
                     <p>Loading</p>}
                 <div>
-                    <button className="btn bg-white rounded-xl" onClick={openPopUp}>
+                    {(isLoggedIn && storedIsAgent === "true")&& <button className="btn bg-white rounded-xl" onClick={openPopUp}>
                         <BsHouseAddFill />
-                        New Rental</button>
+                        New Rental</button>}
                     {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                         <CreateApartment closePopUp={() => setOpen(false)} />
                     </div> : null}
