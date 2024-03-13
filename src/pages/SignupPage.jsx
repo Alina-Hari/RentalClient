@@ -11,7 +11,7 @@ function SignupPage(props) {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const [isAgent, setIsAgent] = useState(false)
+    const [isAgent, setIsAgent] = useState(true)
 
     const navigate = useNavigate();
 

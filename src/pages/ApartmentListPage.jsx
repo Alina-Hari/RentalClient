@@ -74,7 +74,7 @@ export default function ApartmentListPage() {
                 </div>
             </div>
             {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                <CreateApartment closePopUp={() => setOpen(false)} callBack={getApartments()} />
+                <CreateApartment closePopUp={() => setOpen(false)} callBack={getApartments} />
             </div> : null}
         </div>
 
