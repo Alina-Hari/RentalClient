@@ -64,9 +64,7 @@ export default function ApartmentListPage() {
                     <p>Loading</p>}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-0 md:px-20 items-center">
 
-                    {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                        <CreateApartment closePopUp={() => setOpen(false)} callBack={getApartments} />
-                    </div> : null}
+
                     {apartments !== null &&
                         apartments.map((apartment) => {
                             return <ApartmentCard key={apartment._id} value={apartment} />
@@ -75,7 +73,9 @@ export default function ApartmentListPage() {
 
                 </div>
             </div>
-
+            {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
+                <CreateApartment closePopUp={() => setOpen(false)} callBack={getApartments()} />
+            </div> : null}
         </div>
 
     )
