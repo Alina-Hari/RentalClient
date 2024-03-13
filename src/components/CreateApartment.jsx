@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 const apartmentTypes = ["Studio", "Loft", "Duplex", "Apartment", "House"];
 import { useEffect, useState } from "react";
-import DTPicker from "./DTPicker";
+import DTPicker from "./DTPicker"
 import service from "../services/file-upload.service";
 import { MdOutlinePets } from "react-icons/md";
 import { FaCouch } from "react-icons/fa6";
 import { GiHouse } from "react-icons/gi";
-
+import cityData from '../data/citiesOfNetherlands.json'
 
 const COUTRIES_AND_CITIES_API = "https://countriesnow.space/api/v0.1/countries"
 
@@ -26,29 +26,29 @@ function CreateApartment(props) {
   const [images, setImages] = useState([]);
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [locationData, setLocationData] = useState([])
-  const [filteredCountry, setFilteredCountry] = useState(null)
+  // const [filteredCountry, setFilteredCountry] = useState(null)
   const [availableDates, setAvailableDates] = useState({})
   const [address, setAddress] = useState("")
+  const filteredCountry = cityData[0].cities;
 
+  // useEffect(() => {
+  //   axios.get(COUTRIES_AND_CITIES_API)
+  //     .then(response => {
+  //       const tempArray = response.data.data.map((obj) => {
+  //         let country = obj.country;
+  //         let cities = obj.cities;
 
-  useEffect(() => {
-    axios.get(COUTRIES_AND_CITIES_API)
-      .then(response => {
-        const tempArray = response.data.data.map((obj) => {
-          let country = obj.country;
-          let cities = obj.cities;
+  //         return { country, cities };
 
-          return { country, cities };
+  //       })
+  //       setLocationData(tempArray)
 
-        })
-        setLocationData(tempArray)
-
-        console.log(tempArray);
-      })
-      .then(() => {
-        handleCountry()
-      })
-  }, [])
+  //       console.log(tempArray);
+  //     })
+  //     .then(() => {
+  //       handleCountry()
+  //     })
+  // }, [])
 
 
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ function CreateApartment(props) {
       floor,
       price,
       area,
-      country,
+      country:"Netherlands",
       city: cities,
       isFurnished,
       isPetFriendly,
@@ -117,16 +117,16 @@ function CreateApartment(props) {
   }
 
 
-  const handleCountry = () => {
-    let tempArray = locationData.filter((location) => {
-      return location.country === "Netherlands";
-    });
+  // const handleCountry = () => {
+  //   let tempArray = locationData.filter((location) => {
+  //     return location.country === "Netherlands";
+  //   });
 
-    console.log('Filtered Country:', tempArray);
+  //   console.log('Filtered Country:', tempArray);
 
-    setFilteredCountry(tempArray.length > 0 ? tempArray[0].cities : null);
-    console.log('Filtered Cities:', filteredCountry);
-  };
+  //   setFilteredCountry(tempArray.length > 0 ? tempArray[0].cities : null);
+  //   console.log('Filtered Cities:', filteredCountry);
+  // };
 
 
   return (
@@ -188,7 +188,6 @@ function CreateApartment(props) {
             {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs"></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
               <option disabled>Pick one</option>
               {filteredCountry.map((city, index) => {
-                console.log(city)
                 return <option key={index} value={city}>{city}</option>
               }
               )}

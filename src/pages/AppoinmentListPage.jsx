@@ -39,7 +39,7 @@ export default function AppoinmentListPage() {
                 });
         }
     }
-
+  
     // const openPopUp = () => {
     //     setOpen(true);
     // }
@@ -52,7 +52,7 @@ export default function AppoinmentListPage() {
             <div className="w-full h-20 text-2xl p-4 text-center">
                 <h2 className="">{(storedIsAgent === "true") ?  " All appoinments" :`${storedUserName}'s appoinments`}</h2>
             </div>
-            <div className="flex flex-col md:flex-row justify-evenly flex-wrap h-full items-center ">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4  ">
 
                 {appoinments === null &&
                     <p>Loading</p>}
@@ -62,7 +62,7 @@ export default function AppoinmentListPage() {
                     </div> : null} */}
                 {appoinments !== null &&
                     appoinments.map((appoinment) => {
-                        return <AppoinmentCard key={appoinment._id} value={appoinment} />
+                        return <AppoinmentCard key={appoinment._id} value={appoinment} callBack={getAppoinments} />
                     })}
             </div>
         </div>

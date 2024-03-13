@@ -19,8 +19,7 @@ function UpdateApartment(props) {
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false);
   const [images, setImages] = useState(apartment.images);
   const [address, setAddress] = useState(apartment.address);
-
-
+  const storedToken = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
   const handleisFurnished = (e) => {
@@ -30,8 +29,6 @@ function UpdateApartment(props) {
   const handleisPetFriendly = (e) => {
     setIsPetFriendly(e.target.checked);
   };
-
-  const storedToken = localStorage.getItem("authToken");
 
   const handleFileUpload = (e) => {
     setWaitingForImageUrl(true);
