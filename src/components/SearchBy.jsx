@@ -55,13 +55,12 @@ const SearchBy = (props) => {
     };
 
     return (
-        <div className=' relative mx-auto text-gray-600'>
-            <h3 className='mb-2'>City/Country Search</h3>
+        <div className=' relative text-gray-600'>
             <Select className='bg-white h-10 rounded-lg text-sm focus:outline-none'
                 value={selectedOption}
                 onChange={handleSelectChange}
                 options={options}
-                placeholder="Select a city or country..."
+                placeholder="Select a city..."
             />
         </div>
     );

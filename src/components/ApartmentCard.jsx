@@ -4,12 +4,10 @@ import { MdOutlinePets } from "react-icons/md";
 import { FaCouch } from "react-icons/fa6";
 import { GiHouse } from "react-icons/gi";
 
-
 export default function ApartmentCard(props) {
 
     const apartment = props.value;
     const apartmentId = apartment._id
-
 
     return (
         <Link to={`/apartments/${apartmentId}`}>
@@ -31,13 +29,13 @@ export default function ApartmentCard(props) {
                         </div>)
                     }
                 </div>
-                <div className="card-body p-5">
+                <div className="card-body p-5 w-full ">
 
                     <h1 className="card-title">
                         {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
                     </h1>
                     {!(apartment.isAvailable) && <span className="text-blue-700 text-xl">In escrow</span>}
-                    <p className="flex items-center gap-2"><CiLocationOn />{apartment.city}, {apartment.country}</p>
+                    <p className="flex items-center gap-2"><CiLocationOn />{apartment.address}, {apartment.city}</p>
                     <p className="font-medium">$ {apartment.price} / month</p>
                     <div className="flex">
                         <p className="flex items-center gap-2"><GiHouse /> {apartment.area} m²</p>
@@ -47,6 +45,8 @@ export default function ApartmentCard(props) {
 
                 </div>
             </div>
+
+
 
         </Link >
     );

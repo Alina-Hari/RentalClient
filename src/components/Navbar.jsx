@@ -3,31 +3,33 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { LuAmpersand } from "react-icons/lu";
 import { IoMdHome } from "react-icons/io";
+import { useState } from "react";
 
 function Navbar() {
     const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+    const [toggleVar, setToggleVar] = useState(false)
 
     return (
-        <div className="navbar w-full h-[10%] bg-base-200 md:px-10">
+        <div className="navbar w-full h-[10%] bg-base-200 p-0 md:px-10">
             <div className="navbar-start">
-                <div className="dropdown md:hidden">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                <div className="dropdown md:hidden" >
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => { setToggleVar(!toggleVar) }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link to="/">
-                            <button>Home</button>
+                    {toggleVar && (<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li ><Link to="/">
+                            <button onClick={() => { setToggleVar(!toggleVar) }}>Home</button>
                         </Link></li>
 
                         <li><Link to="/Apartments">
-                            <button>Apartments</button>
+                            <button onClick={() => { setToggleVar(!toggleVar) }}>Apartments</button>
                         </Link></li>
-                    </ul>
+                    </ul>)}
                 </div>
-                <div className="flex flex-row gap-4 justify-around invisible md:visible ">
+                <div className="md:flex flex-row gap-4 justify-around hidden">
                     <div className="hover:text-gray-500">
                         <Link to="/">
-                         <button className="flex flex-row gap-2"><IoMdHome className="mt-1" />Home</button>
+                            <button className="flex flex-row gap-2"><IoMdHome className="mt-1" />Home</button>
                         </Link>
                     </div>
                     <div className="hover:text-gray-500">
