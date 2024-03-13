@@ -29,6 +29,9 @@ function UpdateApartment(props) {
   const handleisPetFriendly = (e) => {
     setIsPetFriendly(e.target.checked);
   };
+  const handleisAvailable = (e) => {
+    setIsAvailable(e.target.checked);
+  };
 
   const handleFileUpload = (e) => {
     setWaitingForImageUrl(true);
@@ -153,7 +156,7 @@ function UpdateApartment(props) {
             </label>
             <label className="input flex text-sm items-center gap-2  p-0">
               Available
-              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isAvailable} onChange={handleisPetFriendly} />
+              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isAvailable" name="isAvailable" checked={isAvailable} onChange={handleisAvailable} />
             </label>
           </div>
           <label>

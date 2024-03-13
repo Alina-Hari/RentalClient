@@ -29,6 +29,7 @@ function ApartmentDetailsPage() {
             .then((response) => {
                 setApartment(response.data);
                 console.log("Responce appartment", response);
+                console.log("isAvailable",response.data.isAvailable)
             })
             .catch((error) => console.log(error));
     };
@@ -53,8 +54,20 @@ function ApartmentDetailsPage() {
         axios
             .delete(`${API_URL}/api/apartments/${apartment._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((res) => {
+                cancelAppoinment();
                 navigate('/apartments')
                 console.log("Apartment is deleted", res);
+            })
+            .catch((e) => {
+                console.log("Error, ", e);
+            });
+
+    }
+    function cancelAppoinment() {
+        axios
+            .delete(`${API_URL}/api/delete?apartmentId=${apartmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .then((res) => {
+              console.log(`Appoinments are deleted for ${apartmentId}`, res);
             })
             .catch((e) => {
                 console.log("Error, ", e);
@@ -131,6 +144,8 @@ function ApartmentDetailsPage() {
                                 <h1 className="card-title md:text-2xl">
                                     {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
                                 </h1>
+                                {!(apartment.isAvailable) && <span className="text-blue-700 text-xl w-auto">In escrow</span>}
+
                                 <p className="flex items-center gap-2"><CiLocationOn />{apartment.city}, {apartment.country}</p>
                                 <p className="font-medium">$ {apartment.price} / month</p>
 
@@ -148,7 +163,7 @@ function ApartmentDetailsPage() {
                 </>
             )}
             {/* for agent */}
-           { (isLoggedIn && storedIsAgent === "true") &&<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+           { (isLoggedIn && storedIsAgent === "true" && apartment) &&<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
 
                 <button className="btn btn-outline btn-accent rounded-xl" onClick={openAlert}>Delete</button>
@@ -174,11 +189,12 @@ function ApartmentDetailsPage() {
                 <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
             </div> : null}
             {/* for user */}
-            {(isLoggedIn && storedIsAgent === "false") && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
+            {(isLoggedIn && storedIsAgent === "false" && apartment) && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
                 <p className="font-medium">$ {apartment && apartment.price} / month</p>
                 <button
                     onClick={openAppoinmentPopUp}
-                    className="btn btn-active btn-accent rounded-xl">
+                    className="btn btn-active btn-accent rounded-xl"
+                    disabled={!(apartment.isAvailable)}>
                     <FaCalendarAlt />
                     Book a visit now
                 </button>

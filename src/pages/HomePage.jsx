@@ -23,12 +23,12 @@ export default function HomePage() {
         },
         {
             name: "Renewal Incentives",
-            text: "Lease renewal benefits, like reduced rent increases, complimentary maintenance services, or access to exclusive resident perks."
+            text: "Lease renewal benefits, like reduced rent increases, complimentary maintenance services."
         }
     ]
     return (
         <div className="w-full h-full flex flex-col overflow-y-scroll lg:overflow-y-hidden md:flex-row justify-start md:justify-between  rounded-xl  shadow-sm ">
-            <div className="flex h-[100%] flex-col justify-evenly md:w-1/2 p-2 ">
+            <div className="flex flex-col justify-evenly md:w-1/2 p-2 ">
                 <h2 className='font-bold text-xl md:text-3xl mt-2 mb-2  text-left'>Discover your dream home in the Netherlands - schedule visits with expert agents today!</h2>
                 <p className='mt-2 mb-2'>Find the perfect place to call home. Whether you're searching for a cozy studio,
                     a spacious family apartment, or a modern urban loft, we've got you covered.</p>
@@ -40,9 +40,9 @@ export default function HomePage() {
                  */}
 
 
-                <div className="stats shadow rounded-2xl h-32 md:h-24 md:w-fit">
+                <div className="stats shadow gap-2 w-[100%] rounded-2xl h-32 bg-gray-300 md:h-24">
 
-                    <div className="stat p-4">
+                    <div className="stat p-4 bg-white">
                         <div className="stat-figure text-primary">
                             <FaCalendarAlt className="inline-block w-8 h-6 stroke-current" />
                         </div>
@@ -50,7 +50,7 @@ export default function HomePage() {
                         <div className="stat-title">on one click</div>
                     </div>
 
-                    <div className="stat">
+                    <div className="stat bg-white">
                         <div className="stat-figure text-primary">
                             <HiCursorClick className="inline-block w-8 h-8 stroke-current" />
                         </div>
@@ -59,7 +59,7 @@ export default function HomePage() {
                     </div>
 
 
-                    <div className="stat">
+                    <div className="stat bg-white">
                         <div className="stat-figure text-secondary">
                             <div className="avatar flex justify-center items-center">
                                 <div className="w-14 bg-accent mask mask-hexagon flex justify-center items-center">
@@ -89,7 +89,6 @@ export default function HomePage() {
                                     <div className="text-sm mt-4">
                                         <p>{offer.text}</p>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

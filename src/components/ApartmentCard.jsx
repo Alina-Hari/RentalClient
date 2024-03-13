@@ -36,13 +36,13 @@ export default function ApartmentCard(props) {
                     <h1 className="card-title">
                         {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
                     </h1>
+                    {!(apartment.isAvailable) && <span className="text-blue-700 text-xl">In escrow</span>}
                     <p className="flex items-center gap-2"><CiLocationOn />{apartment.city}, {apartment.country}</p>
                     <p className="font-medium">$ {apartment.price} / month</p>
                     <div className="flex">
                         <p className="flex items-center gap-2"><GiHouse /> {apartment.area} m²</p>
                         <p className="flex items-center gap-2"><FaCouch /> {apartment.isFurnished ? "Furnished" : "Not furnished"}</p>
                         <p className="flex items-center gap-2"><MdOutlinePets /> {apartment.isPetFriendly ? "Pet friendly" : "No pets allowed"}</p>
-
                     </div>
 
                 </div>

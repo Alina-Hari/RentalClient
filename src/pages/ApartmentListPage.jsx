@@ -56,7 +56,7 @@ export default function ApartmentListPage() {
     return (
         <div className="relative h-full flex flex-col overflow-y-scroll gap-3">
             <SearchBy callBack={searchByLocation} />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between md:justify-center items-center">
                 {apartments === null &&
                     <p>Loading</p>}
                 <div>

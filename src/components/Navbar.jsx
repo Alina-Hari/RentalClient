@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { LuAmpersand } from "react-icons/lu";
+import { IoMdHome } from "react-icons/io";
 
 function Navbar() {
     const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -9,7 +10,7 @@ function Navbar() {
     return (
         <div className="navbar w-full h-[10%] bg-base-200 md:px-10">
             <div className="navbar-start">
-                <div className="dropdown">
+                <div className="dropdown md:hidden">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                     </div>
@@ -18,13 +19,24 @@ function Navbar() {
                             <button>Home</button>
                         </Link></li>
 
-                        <li><Link to="/apartments">
+                        <li><Link to="/Apartments">
                             <button>Apartments</button>
                         </Link></li>
                     </ul>
                 </div>
+                <div className="flex flex-row gap-4 justify-around invisible md:visible ">
+                    <div className="hover:text-gray-500">
+                        <Link to="/">
+                         <button className="flex flex-row gap-2"><IoMdHome className="mt-1" />Home</button>
+                        </Link>
+                    </div>
+                    <div className="hover:text-gray-500">
+                        <Link to="/Apartments">
+                            <button>Apartments</button>
+                        </Link>
+                    </div>
+                </div>
             </div>
-
 
             <div className="navbar-center">
                 <Link className="btn btn-ghost text-xl md:text-3xl" to="/">

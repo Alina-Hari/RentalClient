@@ -18,7 +18,7 @@ import IsAnon from './components/isAnon'
 function App() {
 
   return (
-    <div className="h-screen w-screen  overflow-hidden" >
+    <div className="h-screen w-screen p-4 overflow-hidden" >
       <Navbar />
       <div className='h-[80%] p-5'>
         <Routes>
