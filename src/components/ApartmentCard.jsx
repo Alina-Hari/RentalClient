@@ -32,7 +32,7 @@ export default function ApartmentCard(props) {
                 <div className="card-body p-5 w-full ">
 
                     <h1 className="card-title">
-                        {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
+                        {apartment.area && apartment.area < 40 ? "Cosy" : "Spacious"} {apartment.apartmentType} in {apartment.city}
                     </h1>
                     {!(apartment.isAvailable) && <span className="text-blue-700 text-xl">In escrow</span>}
                     <p className="flex items-center gap-2"><CiLocationOn />{apartment.address}, {apartment.city}</p>
