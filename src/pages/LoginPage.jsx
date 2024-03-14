@@ -71,7 +71,7 @@ function LoginPage(props) {
 
                         <button className="btn btn-primary rounded-xl mt-5" type="submit">Login</button>
                     </form>
-                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {errorMessage && <p className="error-message text-red-500 ml-4">*{errorMessage}</p>}
 
                     <div className="flex flex-col align-middle items-center mb-5 justify-center">
                         <p className="mb-2">Don't have an account yet?</p>

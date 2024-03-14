@@ -1,8 +1,9 @@
 // src/pages/SignupPage.jsx
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,7 +15,7 @@ function SignupPage(props) {
     const [isAgent, setIsAgent] = useState(true)
 
     const navigate = useNavigate();
-
+    const { storeToken, authenticateUser, storeUser } = useContext(AuthContext);
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
     const handleName = (e) => setName(e.target.value);
@@ -30,8 +31,19 @@ function SignupPage(props) {
 
         axios.post(`${API_URL}/auth/signup`, requestBody)
             .then((response) => {
-                navigate('/login');
-            })
+                console.log("SignUp", response)
+                const requestBodyLogin = {email, password}
+                axios.post(`${API_URL}/auth/login`, requestBodyLogin)
+                .then((response) => {
+                    console.log("JWT token", response.data.authToken);
+                    console.log("Response", response.data.payload);
+                    storeUser(response.data.payload);
+                    storeToken(response.data.authToken);
+                    authenticateUser();
+                    navigate("/");
+                })
+            })         
+            
             .catch((error) => {
                 const errorDescription = error.response.data.message;
                 setErrorMessage(errorDescription);
@@ -99,7 +111,7 @@ function SignupPage(props) {
                         <button className="btn btn-primary rounded-xl mt-5" type="submit">Sign Up</button>
                     </form>
 
-                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {errorMessage && <p className="error-message text-red-500 ml-4 mb-4">*{errorMessage}</p>}
 
                 </div>
             </div>
