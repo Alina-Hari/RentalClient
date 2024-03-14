@@ -31,7 +31,7 @@ export default function AppoinmentCard(props) {
         axios
             .delete(`${API_URL}/api/appoinments/${appoinment._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((res) => {
-               props.callBack();
+                props.callBack();
                 console.log("Appoinment is deleted", res);
             })
             .catch((e) => {
@@ -66,9 +66,9 @@ export default function AppoinmentCard(props) {
                             </div>
                             <h3 className="font-bold text-lg">Cancel Confirmation</h3>
                             <p className="py-4">Are you sure you want to cancel this appoinment?</p>
-                            <div className="modal-actions">
-                                <button className="btn btn-sm btn-circle btn-ghost" onClick={() => setAlert(false)}>No</button>
-                                <button className="btn btn-sm btn-circle btn-ghost" onClick={cancelAppoinment}>Yes</button>
+                            <div className=" modal-actions flex gap-5 justify-end">
+                                <button className="btn btn-sm btn-accent rounded-xl" onClick={() => setAlert(false)}>No</button>
+                                <button className="btn btn-sm btn-ghost" onClick={cancelAppoinment}>Yes</button>
                             </div>
                         </div>
                     </div>

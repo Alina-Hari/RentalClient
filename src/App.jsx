@@ -18,9 +18,9 @@ import { useState } from 'react'
 function App() {
 
   return (
-    <div className="h-screen w-screen overflow-hidden" >
+    <div className="h-screen w-screen lg:overflow-hidden bg-stone-200" >
       <Navbar />
-      <div className='h-[90%] p-5 pb-0'>
+      <div className='h-[90%] p-5 pb-0 bg-stone-200'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />

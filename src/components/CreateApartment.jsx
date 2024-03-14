@@ -107,115 +107,129 @@ function CreateApartment(props) {
         </div>
         <form onSubmit={handleSubmit}>
 
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Apartment Type</span>
-            </div>
-            <select className="select select-bordered select-xs w-full max-w-xs"
-              name="apartmentType"
-              id="apartmentType"
-              value={apartmentType}
-              required
-              onChange={(e) => {
-                setApartmentType(e.target.value);
-              }}
-            >
-              <option value="">-- Select Type --</option>
-              {apartmentTypes.map((apartmentType, index) => {
-                return (
-                  <option key={index} value={apartmentType}>
-                    {apartmentType}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-
-          <div className="flex gap-3">
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Floor</span>
-              </div>
-              <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} /></label>
-
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Surface</span>
-              </div>
-              <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} /></label>
-          </div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Price</span></div>
-            <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
-
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Pick city</span>
-            </div>
-            {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs"></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
-              <option disabled>Pick one</option>
-              {filteredCountry.map((city, index) => {
-                return <option key={index} value={city}>{city}</option>
-              }
-              )}
-            </select>)}
-          </label>
-
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Address</span>
-            </div>
-            <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
-
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Description</span>
-            </div>
-            <textarea className="textarea textarea-bordered h-24" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <div className="label">
-            </div>
-          </label>
 
 
-          <div className="flex justify-between p-2">
-            <label className="input flex items-center gap-2 text-sm p-0">
-              <FaCouch /> Furnished
-              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
-            </label>
+          <div className="flex flex-col w-full lg:flex-row">
+            <div className="grid flex-grow h-full card rounded-box place-items-left">
 
-            <label className="input flex items-center gap-2 text-sm p-0">
-              <MdOutlinePets /> Pet friendly
-              <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
-            </label>
-          </div>
-          <div className="flex flex-col justify-between border-black border-2 rounded-lg px-5 py-7">
-            <label className="form-control w-full mb-2">
-              Select Dates for Rentee visits
-            </label>
-            <DTPicker setAvailableDates={setAvailableDates} />
-          </div>
 
-          <label className="form-control w-full max-w-xs mt-5">
-            <div>
-              <span className="label-text">Add photos</span>
-            </div>
-            <input className="file-input file-input-bordered file-input-xs w-full max-w-xs" type="file" multiple onChange={(e) => handleFileUpload(e)} />
-          </label>
-          <div className="avatar-group -space-x-6 rtl:space-x-reverse">
-            {images &&
-              (images.map((image, index) => (
-                <div key={index} className="avatar">
-                  <div className="w-12 rounded" >
-                    <img src={image} alt="apartment-photo" />
-                  </div>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Apartment Type</span>
                 </div>
-              ))
-              )}
+                <select className="select select-bordered select-xs w-full max-w-xs"
+                  name="apartmentType"
+                  id="apartmentType"
+                  value={apartmentType}
+                  required
+                  onChange={(e) => {
+                    setApartmentType(e.target.value);
+                  }}
+                >
+                  <option value="">-- Select Type --</option>
+                  {apartmentTypes.map((apartmentType, index) => {
+                    return (
+                      <option key={index} value={apartmentType}>
+                        {apartmentType}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+
+              <div className="flex gap-3">
+                <label className="form-control w-full max-w-xs">
+                  <div className="label">
+                    <span className="label-text">Floor</span>
+                  </div>
+                  <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="floor" value={floor} onChange={(e) => setFloor(e.target.value)} /></label>
+
+                <label className="form-control w-full max-w-xs">
+                  <div className="label">
+                    <span className="label-text">Surface</span>
+                  </div>
+                  <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="area" value={area} onChange={(e) => setArea(e.target.value)} /></label>
+              </div>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Price</span></div>
+                <input className="input input-bordered input-xs w-full max-w-xs" type="number" name="price" value={price} required onChange={(e) => setPrice(e.target.value)} /></label>
+
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Pick city</span>
+                </div>
+                {(filteredCountry === null || filteredCountry === undefined) ? <select className="select select-bordered select-xs w-full max-w-xs"></select> : (<select className="select select-bordered select-xs w-full max-w-xs" name="city" defaultValue={"default"} required onChange={(e) => setCities(e.target.value)}>
+                  <option disabled>Pick one</option>
+                  {filteredCountry.map((city, index) => {
+                    return <option key={index} value={city}>{city}</option>
+                  }
+                  )}
+                </select>)}
+              </label>
+
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Address</span>
+                </div>
+                <input className="input input-bordered input-xs w-full max-w-xs" type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
+
+              <label className="form-control">
+                <div className="label">
+                  <span className="label-text">Description</span>
+                </div>
+                <textarea className="textarea textarea-bordered h-24" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                <div className="label">
+                </div>
+              </label>
+
+
+              <div className="flex justify-between p-2">
+                <label className="input flex items-center gap-2 text-sm p-0">
+                  <FaCouch /> Furnished
+                  <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isFurnished" name="isFurnished" checked={isFurnished} onChange={handleisFurnished} />
+                </label>
+
+                <label className="input flex items-center gap-2 text-sm p-0">
+                  <MdOutlinePets /> Pet friendly
+                  <input type="checkbox" className="checkbox checkbox-xs checkbox-accent" id="isPetFriendly" name="isPetFriendly" checked={isPetFriendly} onChange={handleisPetFriendly} />
+                </label>
+              </div>
+
+            </div>
+
+            <div className="divider lg:divider-horizontal"></div>
+
+            <div className="grid flex-grow h-full card rounded-box place-items-left">
+              <label>
+                Select Dates for Rentee visits
+              </label>
+              <DTPicker setAvailableDates={setAvailableDates} />
+
+
+              <label className="form-control w-full max-w-xs mt-5">
+                <div>
+                  <span className="label-text">Add photos</span>
+                </div>
+                <input className="file-input file-input-bordered file-input-xs w-full max-w-xs" type="file" multiple onChange={(e) => handleFileUpload(e)} />
+              </label>
+              <div className="avatar-group -space-x-6 rtl:space-x-reverse">
+                {images &&
+                  (images.map((image, index) => (
+                    <div key={index} className="avatar">
+                      <div className="w-12 rounded" >
+                        <img src={image} alt="apartment-photo" />
+                      </div>
+                    </div>
+                  ))
+                  )}
+              </div>
+            </div>
           </div>
           <div className="w-full flex justify-center">
             <button type="submit" className="btn btn-outline btn-accent rounded-lg mt-5 items-center" disabled={waitingForImageUrl}>Create</button>
-          </div></form>
+          </div>
+        </form>
       </div >
     </div >
   );
