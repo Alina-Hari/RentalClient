@@ -176,7 +176,7 @@ function ApartmentDetailsPage(props) {
                 )}
             </div>}
             {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
+                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} callBack={getApartment}/>
             </div> : null}
             {/* for user */}
             {(isLoggedIn && storedIsAgent === "false" && apartment) && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
