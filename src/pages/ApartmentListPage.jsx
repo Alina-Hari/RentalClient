@@ -54,7 +54,7 @@ export default function ApartmentListPage() {
 
     }
     return (
-        <div className="relative h-full flex flex-col overflow-y-scroll gap-3">
+        <div className="h-full flex flex-col overflow-y-scroll gap-3">
             <div className="flex justify-center align-middle flex-row ">
                 <SearchBy callBack={searchByLocation} /> {(isLoggedIn && storedIsAgent === "true") && <button className="btn bg-white rounded-xl ml-5" onClick={openPopUp}>
                     <BsHouseAddFill />
@@ -62,7 +62,7 @@ export default function ApartmentListPage() {
             <div>
                 {apartments === null &&
                     <p>Loading</p>}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-0 md:px-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-0 md:px-20 items-center">
 
 
                     {apartments !== null &&

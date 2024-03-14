@@ -29,8 +29,8 @@ export default function HomePage() {
     return (
         <div className="w-full h-full flex flex-col overflow-y-scroll lg:overflow-y-hidden md:flex-row justify-start md:justify-between  rounded-xl  shadow-sm ">
             <div className="flex flex-col justify-evenly md:w-1/2 p-2 ">
-                <h2 className='font-bold text-xl md:text-3xl mt-2 mb-2  text-left'>Discover your dream home in the Netherlands - schedule visits with expert agents today!</h2>
-                <p className='mt-2 mb-2'>Find the perfect place to call home. Whether you're searching for a cozy studio,
+                <h2 className='font-bold text-2xl md:text-4xl mt-2 mb-2 text-left'>Discover your dream home in the Netherlands - schedule visits with expert agents today!</h2>
+                <p className='mt-2 text-2xl mb-2'>Find the perfect place to call home. Whether you're searching for a cozy studio,
                     a spacious family apartment, or a modern urban loft, we've got you covered.</p>
                 {/* <div className="flex flex-row justify-evenly w-full h-auto mt-4 mb-4">
                     <p className="flex flex-col "><span className='text-xl font-bold'>115k+</span><span className="text-xs font-thin">Capital Raised</span></p>
@@ -40,7 +40,7 @@ export default function HomePage() {
                  */}
 
 
-                <div className="stats shadow gap-2 w-[100%] rounded-2xl h-32 bg-gray-300 md:h-24">
+                <div className="stats shadow gap-2 w-[100%] rounded-2xl h-20 bg-gray-300 md:h-24">
 
                     <div className="stat p-4 bg-white">
                         <div className="stat-figure text-primary">
@@ -100,7 +100,7 @@ export default function HomePage() {
                 </div>
             </div>
             <div className="hidden sm:block relative md:flex h-[100%] flex-col justify-evenly md:w-1/2 p-2 ">
-                <img src={netherlands} className="object-scale-down max-w-[80%] h-auto" />
+                <img src={netherlands} className="object-scale-down" />
                 <div className='absolute left-80 top-60 text-5xl'><IconContext.Provider value={{ color: "white" }}>
                     <BiHomeHeart /></IconContext.Provider></div>
             </div>

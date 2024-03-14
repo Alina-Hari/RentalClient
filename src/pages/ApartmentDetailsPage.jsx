@@ -23,7 +23,7 @@ function ApartmentDetailsPage(props) {
     const storedIsAgent = localStorage.getItem("isAgent");
     const { isLoggedIn } = useContext(AuthContext);
 
-    props.getId(apartmentId)
+    // props.getId(apartmentId)
 
     const getApartment = () => {
         axios
@@ -78,10 +78,10 @@ function ApartmentDetailsPage(props) {
     }
 
     return (
-        <div className="h-[100%] w-full overflow-y-scroll md:overflow-y-hidden">
+        <div className="h-[100%] w-full overflow-y-scroll">
             {apartment && (
                 <>
-                    <div className="relative h-[80%]">
+                    <div className="relative h-[90%]">
                         <Link className="absolute top-5 left-5 md:hidden" to="/apartments">
                             <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
                         </Link>
@@ -99,14 +99,11 @@ function ApartmentDetailsPage(props) {
                             })}
                         </div>
 
-                        <div className="h-[100%] md:flex flex-row-reverse justify-between">
-                            <div className="hidden w-1/2  md:flex flex-col">
+                        <div className="h-full md:flex flex-row-reverse justify-between">
+                            <div className="hidden w-1/2 h-full md:flex flex-col">
 
                                 <div className="relative">
-                                    <Link className="absolute top-5 left-5" to="/apartments">
-                                        <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
-                                    </Link>
-                                    <div className="w-full h-full" >
+                                    <div className="w-full h-96" >
                                         <img
                                             src={apartment.images[0]}
                                             className="object-cover w-full h-full mx-auto rounded-xl"
@@ -116,20 +113,9 @@ function ApartmentDetailsPage(props) {
 
                                 <div className="flex gap-2">
                                     {apartment.images.map((image, index) => {
-                                        if (index % 3 === 1 || index % 3 === 2) {
+                                        if (index === 1 || index === 2) {
                                             return (
                                                 <div className="w-1/2 h-52 mt-2" key={index}>
-                                                    <img
-                                                        src={image}
-                                                        className="object-cover w-full h-full mx-auto rounded-xl"
-                                                        alt={`Image ${index + 1}`}
-                                                    />
-                                                </div>
-                                            );
-
-                                        } else if (index > 2) {
-                                            return (
-                                                <div className="w-full h-40" key={index}>
                                                     <img
                                                         src={image}
                                                         className="object-cover w-full h-full mx-auto rounded-xl"
@@ -142,23 +128,19 @@ function ApartmentDetailsPage(props) {
 
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-1 mt-5 md:ml-5 md:mt-0">
-                                <h1 className="card-title md:text-4xl">
-                                    {apartment.area && apartment.area < 40 ? "Cosy" : "Spacy"} {apartment.apartmentType} in {apartment.city}
+                            <div className="flex flex-col lg:items-center gap-1 mt-5 md:mt-0 md:pr-10 w-full md:w-1/2 px-0 lg:px-20">
+                                <h1 className="card-title md:text-4xl text-left lg:text-center">
+                                    {apartment.area && apartment.area < 40 ? "Cosy" : "Spacious"} {apartment.apartmentType} in {apartment.city}
                                 </h1>
                                 {!(apartment.isAvailable) && <span className="text-blue-700 text-xl w-auto">In escrow</span>}
-
-                                <p className="flex items-center gap-2 text-slate-500 " ><CiLocationOn />{apartment.address}, {apartment.city}, {apartment.country}</p>
+                                <p className="flex items-center gap-2 text-slate-500 " ><CiLocationOn />{apartment.address}, {apartment.city}</p>
                                 <p className="font-medium mt-5 text-xl">$ {apartment.price} / month</p>
-                                {/* <div>
-                                    <p>{apartment.availableDates && apartment.availableDates[0]}</p>
-                                </div> */}
-                                <div className="flex gap-5 bg-slate-100 rounded-xl p-3 justify-between">
+                                <div className="flex gap-5 bg-slate-100 rounded-xl p-3 justify-between mt-5 md:mt-10">
                                     <p className="flex items-center gap-2"><GiHouse /> {apartment.area} m²</p>
                                     <p className="flex items-center gap-2"><FaCouch /> {apartment.isFurnished ? "Furnished" : "Not furnished"}</p>
                                     <p className="flex items-center gap-2"><MdOutlinePets /> {apartment.isPetFriendly ? "Pet friendly" : "No pets allowed"}</p>
                                 </div>
-                                <p>{apartment.description}</p>
+                                <p className="mt-5 lg:mt-20 mb-20 md:mb-10 lg:mb-5 pb-10 md:pb-24 md:pr-5 text-justify">{apartment.description}</p>
 
                             </div>
                         </div>
@@ -166,10 +148,15 @@ function ApartmentDetailsPage(props) {
                 </>
             )}
             {/* for agent */}
-            {(isLoggedIn && storedIsAgent === "true" && apartment) && <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
-                <button className="btn btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
+            {(isLoggedIn && storedIsAgent === "true" && apartment) && <div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-[50%] lg:w-[35%]  bg-slate-100 py-4 px-6 shadow-inner rounded-t-2xl ml-0 lg:ml-28 ">
+                <Link to="/apartments">
+                    <button className="btn btn-circle btn-outline bg-slate-200 relative"><IoIosArrowRoundBack /></button>
+                </Link>
+                <div className="flex gap-3">
+                    <button className="btn hover:btn-outline btn-accent rounded-xl" onClick={openPopUp}>Edit</button>
 
-                <button className="btn btn-outline btn-accent rounded-xl" onClick={openAlert}>Delete</button>
+                    <button className="btn  btn-accent btn-outline rounded-xl" onClick={openAlert}>Delete</button>
+                </div>
                 {alert && (
                     <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-opacity-50 bg-black">
                         <div className="bg-white rounded-xl shadow-lg p-5 max-w-md w-full mx-4 overflow-auto">
@@ -180,16 +167,16 @@ function ApartmentDetailsPage(props) {
                             </div>
                             <h3 className="font-bold text-lg">Delete Confirmation</h3>
                             <p className="py-4">Are you sure you want to delete this apartment?</p>
-                            <div className="modal-actions">
-                                <button className="btn btn-sm btn-circle btn-ghost" onClick={() => setAlert(false)}>Cancel</button>
-                                <button className="btn btn-sm btn-circle btn-ghost" onClick={deleteApartment}>Delete</button>
+                            <div className="modal-actions flex gap-5 justify-end">
+                                <button className="btn btn-sm btn-accent rounded-xl" onClick={() => setAlert(false)}>Cancel</button>
+                                <button className="btn btn-sm btn-ghost" onClick={deleteApartment}>Delete</button>
                             </div>
                         </div>
                     </div>
                 )}
             </div>}
             {open ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} callBack={getApartment} />
+                <UpdateApartment closePopUp={() => setOpen(false)} apartment={apartment} />
             </div> : null}
             {/* for user */}
             {(isLoggedIn && storedIsAgent === "false" && apartment) && (<div className="flex justify-between align-middle items-center fixed bottom-0 left-0 w-full md:w-1/2 bg-slate-100 py-4 px-6 shadow-lg rounded-t-2xl">
@@ -203,7 +190,7 @@ function ApartmentDetailsPage(props) {
                 </button>
             </div>)}
             {openAppoinment ? <div className="absolute top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
-                <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} />
+                <CreateAppoinment closePopUp={() => setOpenAppoinment(false)} apartmentId={apartment._id} apartment={apartment} />
             </div> : null
             }
         </div>

@@ -32,25 +32,6 @@ function CreateApartment(props) {
   const [description, setDescription] = useState("")
   const filteredCountry = cityData[0].cities;
 
-  // useEffect(() => {
-  //   axios.get(COUTRIES_AND_CITIES_API)
-  //     .then(response => {
-  //       const tempArray = response.data.data.map((obj) => {
-  //         let country = obj.country;
-  //         let cities = obj.cities;
-
-  //         return { country, cities };
-
-  //       })
-  //       setLocationData(tempArray)
-
-  //       console.log(tempArray);
-  //     })
-  //     .then(() => {
-  //       handleCountry()
-  //     })
-  // }, [])
-
 
   const navigate = useNavigate();
 
@@ -66,11 +47,8 @@ function CreateApartment(props) {
   const handleFileUpload = (e) => {
 
     setWaitingForImageUrl(true);
-
     const dataToUpload = new FormData();
-
     const files = Array.from(e.target.files);
-
     files.forEach((file) => {
       dataToUpload.append(`images`, file);
     });
@@ -119,22 +97,9 @@ function CreateApartment(props) {
 
   }
 
-
-  // const handleCountry = () => {
-  //   let tempArray = locationData.filter((location) => {
-  //     return location.country === "Netherlands";
-  //   });
-
-  //   console.log('Filtered Country:', tempArray);
-
-  //   setFilteredCountry(tempArray.length > 0 ? tempArray[0].cities : null);
-  //   console.log('Filtered Cities:', filteredCountry);
-  // };
-
-
   return (
-    <div className="w-full h-[90%] flex items-center justify-center  bg-opacity-50 bg-black">
-      <div className="bg-white rounded-xl shadow-lg h-[80%] p-5  w-[80%] md:w-[50%] mx-4 my-2 overflow-auto">
+    <div className="w-full h-full flex items-center justify-center bg-opacity-50 bg-black md:text-lg">
+      <div className="bg-white rounded-xl shadow-lg p-5 w-full md:w-[80%] mx-4 overflow-auto md:text-lg h-[90%] md:h-[80%]">
         <div className="card-actions justify-end">
           <button onClick={props.closePopUp} type="button" className="btn btn-xs btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
