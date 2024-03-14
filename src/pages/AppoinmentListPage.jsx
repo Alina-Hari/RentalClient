@@ -60,10 +60,11 @@ export default function AppoinmentListPage() {
                 {/* {open ? <div className="absolute  top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] ">
                         <CreateApartment closePopUp={() => setOpen(false)}  />
                     </div> : null} */}
-                {appoinments !== null &&
+                {appoinments&&
                     appoinments.map((appoinment) => {
                         return <AppoinmentCard key={appoinment._id} value={appoinment} callBack={getAppoinments} />
                     })}
+                    {appoinments.length === 0 && <p>No appoinments made.</p>}
             </div>
         </div>
     )
