@@ -6,6 +6,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer'
 
 export default function HomePage() {
 
@@ -28,9 +29,9 @@ export default function HomePage() {
         }
     ]
     return (
-        <div className='bg-stone-200 h-full overflow-y-scroll'>
-            <div className="w-full h-full flex flex-col lg:flex-row justify-start md:justify-between rounded-xl  shadow-sm ">
-                <div className='flex flex-col justify-start gap-20'>
+        <div className='bg-stone-200 h-full overflow-y-scroll lg:overflow-y-hidden'>
+            <div className="w-full h-[80%] flex flex-col lg:flex-row justify-start md:justify-between rounded-xl mb-7  shadow-sm ">
+                <div className='flex flex-col justify-start gap-10'>
                     <div className="flex flex-col justify-between p-2 ">
                         <h1 className='text-4xl lg:text-7xl font-extrabold my-10 w-full text-accent '>Renting made easy</h1>
 
@@ -128,6 +129,7 @@ export default function HomePage() {
                         <BiHomeHeart /></IconContext.Provider></div> */}
                 </div>
             </div>
+            <Footer />
 
         </div >
     )
