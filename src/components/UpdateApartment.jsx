@@ -180,7 +180,7 @@ function UpdateApartment(props) {
             <div className="divider lg:divider-horizontal"></div>
             <div className="grid flex-grow h-full card rounded-box place-items-left">
               <label>
-                <DTPicker setAvailableDates={setAvailableDates} />
+                <DTPicker setAvailableDates={setAvailableDates} availableDates={availableDates} />
               </label>
 
               <label className="form-control w-full max-w-xs mt-5">

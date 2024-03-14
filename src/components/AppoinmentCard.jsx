@@ -41,7 +41,7 @@ export default function AppoinmentCard(props) {
     }
 
     return (
-        <div className=" h-40  bg-white w-full mb-10 flex flex-row justify-around rounded-xl shadow-md overflow-hidden  mr-10 ">
+        <div className=" h-44  bg-white w-full mb-10 flex flex-row justify-around rounded-xl shadow-md overflow-hidden  mr-10 ">
             <div className="p-8 flex flex-col justify-center text-center  w-[30%]">
                 <p className="block mt-1 mb-2 text-md leading-tight font-medium">{apnDay},{apnMonth}</p>
                 <p className="block mt-1  mb-2  text-4xl leading-tight font-medium text-blue-700">{apnDate}<span className="text-sm">th</span></p>
