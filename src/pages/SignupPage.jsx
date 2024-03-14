@@ -40,11 +40,11 @@ function SignupPage(props) {
 
 
     return (
-        <div className="hero h-full">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero h-full overflow-y-scroll">
+            <div className="hero-content w-full flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Sign Up</h1>
-                    <p className="py-6">Sign up now to start booking visits. Got an apartment to rent out? Register today to list your property, manage bookings, and reach potential tenants more efficiently.</p>
+                    <h1 className="text-2xl md:text-5xl font-bold">Sign Up</h1>
+                    <p className="py-6">Sign up now to start booking visits to rent.<br></br> If you are an agent, create an account to upload your apartments to rent. </p>
                 </div>
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-xl">
 
@@ -101,11 +101,6 @@ function SignupPage(props) {
 
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                    <div className="flex flex-col align-middle items-center mb-5 justify-center">
-                        <p>Already have account?</p>
-                        <Link to={"/login"}> Login</Link>
-
-                    </div>
                 </div>
             </div>
         </div>

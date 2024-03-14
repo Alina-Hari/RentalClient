@@ -41,17 +41,17 @@ export default function AppoinmentCard(props) {
     }
 
     return (
-        <div className="max-w-md md:mx-0 flex flex-col h-40 justify-evenly bg-white w-full mb-10  flex flex-col justify-center md:flex-row md:justify-around rounded-xl shadow-md overflow-hidden md:max-w-2xl mr-10 ">
-            <div className="p-8 flex flex-col justify-center text-center  w-[20%]">
+        <div className=" h-40  bg-white w-full mb-10 flex flex-row justify-around rounded-xl shadow-md overflow-hidden  mr-10 ">
+            <div className="p-8 flex flex-col justify-center text-center  w-[30%]">
                 <p className="block mt-1 mb-2 text-md leading-tight font-medium">{apnDay},{apnMonth}</p>
                 <p className="block mt-1  mb-2  text-4xl leading-tight font-medium text-blue-700">{apnDate}<span className="text-sm">th</span></p>
                 <p className="block mt-1  mb-2  text-md leading-tight font-medium flex flex-row"><IoMdTime />{apnTime}</p>
             </div>
-            <div className="p-8 w-[80%]">
+            <div className="p-8 w-[70%]">
                 <div className="uppercase tracking-wide text-sm text-indigo-500 flex flex-row font-semibold"><MdLocationOn />{address},{city}</div>
                 {storedIsAgent === "true" && <p className="mt-2 text-gray-500">Rentee - {userName}</p>}
-                <button className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    <Link to={`/apartments/${apartmentId}`} ><ImHome3 /></Link>
+                <button className="mt-5 px-2  py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <Link to={`/apartments/${apartmentId}`}>More Info</Link>
                 </button>
                 {storedIsAgent === "false" && <button className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" onClick={openAlert}>
                     <ImBin />

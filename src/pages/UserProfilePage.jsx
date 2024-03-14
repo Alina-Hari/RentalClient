@@ -10,7 +10,7 @@ export default function UserProfilePage() {
     const storedUserName = localStorage.getItem("userName");
 
 
-    return (<div className="h-[100%] md:w-full  dark:bg-gray-800 overflow-hidden flex flex-wrap items-center  justify-center ">
+    return (<div className="h-[100%] md:w-full  dark:bg-gray-800 overflow-y-scroll  flex flex-wrap items-center  justify-center ">
         <div className="container lg:w-full lg:h-[100%] mx-10  lg: mx-0 xl:w-2/7 sm:w-full md:w-2/3 bg-white  shadow-lg   rounded-xl  transform   duration-200 easy-in-out">
             <div className=" h-32 lg:h-[20%] overflow-hidden bg-gradient" >
             </div>

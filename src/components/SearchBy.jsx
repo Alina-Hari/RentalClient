@@ -44,7 +44,7 @@ const SearchBy = (props) => {
         let type = "city"
         return { label, value, type };
     })
-    const cityAndCountry = [...cityCountryData, ...cityArray]
+    const cityAndCountry = [ ...cityArray]
     useEffect(() => { setOptions(cityAndCountry); }, [])
 
     // Handle when the user selects an option from the dropdown

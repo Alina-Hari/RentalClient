@@ -57,13 +57,13 @@ export default function DTPicker({ setAvailableDates }) {
     <div className="flex flex-col  justify-start flex-wrap w-100 ">
       <label>Date:</label>
       <div className='h-[50%] p-4 flex flex-col py-4 md:flex-row'>
-        <label className='w-1/2 mr-2  py-2 font-bold' >From:  <input type="date" id="startDate" disabled={disableDatesBtn} min={dateNow} onChange={handleStartDate} /></label>
-        <label className='w-1/2  mr-2  py-2 font-bold'>To:  <input type="date" id="endDate" disabled={disableDateTwo || disableDatesBtn} min={startDate} onChange={handleEndDate} /></label>
+        <label className='w-1/2 mr-2  py-2 font-bold' >From:  <input required type="date" id="startDate" disabled={disableDatesBtn} min={dateNow} onChange={handleStartDate} /></label>
+        <label className='w-1/2  mr-2  py-2 font-bold'>To:  <input required type="date" id="endDate" disabled={disableDateTwo || disableDatesBtn} min={startDate} onChange={handleEndDate} /></label>
       </div>
       <label>Time:</label>
       <div className='h-[50%] p-4 flex flex-col md:flex-row'>
-        <label className='w-1/2 mr-2  py-2 font-bold'>From:  <input type="time" id="startTime" disabled={disableDatesBtn} onChange={handleStartTime} /></label>
-        <label className='w-1/2 mr-2  py-2 font-bold'>To:  <input type="time" id="endTime" disabled={disableTimeTwo || disableDatesBtn} onChange={handleEndTime} /> </label>
+        <label className='w-1/2 mr-2  py-2 font-bold'>From:  <input required type="time" id="startTime" disabled={disableDatesBtn} onChange={handleStartTime} /></label>
+        <label className='w-1/2 mr-2  py-2 font-bold'>To:  <input required type="time" id="endTime" disabled={disableTimeTwo || disableDatesBtn} onChange={handleEndTime} /> </label>
       </div>
       {errorMessage && <p className='error'>Select all date and time values (**Start date/time cannot be greater than end date/time)</p>}
       {!disableDatesBtn && <button type="button" className='btn btn-outline btn-accent w-[30%] ml-[30%] rounded-lg items-center' onClick={addDateTime}>Add Dates</button>}
