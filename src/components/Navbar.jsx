@@ -11,7 +11,7 @@ function Navbar() {
 
     return (
         <div className="navbar w-full h-[10%] bg-stone-200 p-5 md:px-10 text-md">
-            
+
             <div className="navbar-start">
                 <Link className="btn btn-ghost text-xl md:text-3xl" to="/">
                     <div className="flex items-center"><span>Click</span><span className="rotate-180"><LuAmpersand /></span>
@@ -20,7 +20,7 @@ function Navbar() {
             </div>
             <div className="navbar-center">
                 <div className="dropdown sm:hidden" >
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => { setToggleVar(!toggleHamburg) }}>
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => { setToggleVar(!toggleVar) }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                     </div>
                     {toggleVar && (<ul tabIndex={0} className="menu menu-sm dropdown-content mt-2 z-[1] p-4 shadow-xl bg-base-100 rounded-box w-40">
@@ -60,7 +60,7 @@ function Navbar() {
 
                     {isLoggedIn && (
                         <>
-                            <button className ="hover:text-gray-400" onClick={logOutUser}>Logout</button>
+                            <button className="hover:text-gray-400" onClick={logOutUser}>Logout</button>
                             <div className="avatar">
                                 <div className="w-8 bg-accent mask mask-hexagon ">
                                     <Link to='/userprofile'><span className="text-white pl-3 text-center align-middle">{user && user.name[0]}</span></Link>
@@ -79,9 +79,9 @@ function Navbar() {
                             </Link>
                         </>
                     )}
-                      
+
                 </div>
-               
+
                 <div>
                 </div>
             </div>
